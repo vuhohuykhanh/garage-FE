@@ -1,0 +1,77 @@
+.footer-container {
+    border-top: 3px solid #ccc;
+    margin-top: 60px;
+}
+
+.logo-footer {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.fanpage_container {
+    position: relative;
+}
+
+.fanpage_background {
+    width: 90%;
+    object-fit: contain;
+    opacity: 0.5;
+}
+
+.fanpage_header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+}
+
+.fanpage_header-avatar {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+}
+
+.fanpage_header-content {
+    margin-left: 10px !important;
+}
+
+.fanpage_name {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.fanpage_description {
+    font-size: 16px;
+}
+
+.fanpage_footer-content {
+    width: 90%;
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fanpage_interactAction {
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+    font-weight: bold;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 2px 4px;
+}
+
+.fanpage_like {
+    margin-left: 10px;
+}
+
+.fanpage_share {
+    margin-right: 10px;
+}
