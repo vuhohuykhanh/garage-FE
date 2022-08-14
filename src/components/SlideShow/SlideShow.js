@@ -16,7 +16,7 @@ const SlideShow = () => {
   });
   const showSlides = useCallback(
     (n) => {
-      console.log(slideIndex, 234);
+      
       let i;
       let slides = document.getElementsByClassName("mySlides");
       let dots = document.getElementsByClassName("dot");
@@ -42,10 +42,10 @@ const SlideShow = () => {
     const slide = slideIndex + n;
     setSlideIndex(slide);
   };
-  console.log(slideIndex, "out");
+
 
   const currentSlide = (n) => {
-    console.log("asdf");
+   
     const slide = n;
     setSlideIndex(slide);
   };

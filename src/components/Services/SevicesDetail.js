@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Input, Avatar, Button, Popper } from "@mui/material";
-
 import { styled } from "@mui/material/styles";
 import TitleService from "./TitleService";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { getAServiceByIDAPI } from "../../services/index";
 export default function SevicesDetail() {
+  const { search } = useLocation();
+  const [services, setServices] = React.useState([]);
+  const navigate = useNavigate();
+  const id = search.split("?")[1];
+
+  async function getAServiceByID(id) {
+    const res = await getAServiceByIDAPI(id);
+    if (res?.status === 200) {
+      setServices(res?.data);
+    }
+  }
+
+  useEffect(() => {
+    getAServiceByID(id);
+  }, [id]);
+
   return (
     <Box>
       <Box>
@@ -37,7 +54,7 @@ export default function SevicesDetail() {
           }}
         />
       </Box>
-      <TitleService />
+      <TitleService services={services}/>
       <Box width="90.4%" m="auto">
         <Typography
           style={{

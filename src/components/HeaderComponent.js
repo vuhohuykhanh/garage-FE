@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Input, Avatar, Button, Popper } from "@mui/material";
-// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+
+import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import { getAllServiceTypeAPI, getAllProductTypeAPI } from "../services/index";
 
 const arrLogo = [
   {
@@ -32,14 +34,34 @@ const arrLogo = [
     image: require("../assets/images/honda11.png"),
   },
 ];
-export default function HeaderComponent() {
+export default function HeaderComponent({ userInfo }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isAnchorEl, setIsAnchorEl] = React.useState(null);
+  const [services, setServices] = React.useState([]);
+  const [product, setProduct] = React.useState([]);
+  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+
+  async function getAllService() {
+    const res = await getAllServiceTypeAPI();
+    if (res?.status === 200) {
+      setServices(res?.data);
+    }
+    const res1 = await getAllProductTypeAPI();
+    if (res1?.status === 200) {
+      setProduct(res1?.data);
+    }
+  }
+  useEffect(() => {
+    getAllService();
+  }, []);
 
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
+    setIsAnchorEl(null);
   };
   const handleClick1 = (event) => {
+    setAnchorEl(null);
     setIsAnchorEl(isAnchorEl ? null : event.currentTarget);
   };
   const isOpen = Boolean(isAnchorEl);
@@ -47,11 +69,12 @@ export default function HeaderComponent() {
 
   const id = open ? "simple-popper" : undefined;
   const id1 = open ? "simple-popper" : undefined;
+
   return (
     <Box>
       <BoxContainer>
         <BoxContentHeader>
-          <Button>
+          <Button onClick={() => navigate("/")}>
             <TypographyeText>Trang chủ</TypographyeText>
           </Button>
           <Box
@@ -76,12 +99,14 @@ export default function HeaderComponent() {
           >
             1
           </Box>
-          <Button onClick={handleClick}>
+          <Button onClick={handleClick1}>
             <TypographyeText>PHỤ KIỆN</TypographyeText>
             {/* <ArrowDropDownIcon color="action" /> */}
           </Button>
         </BoxContentHeader>
-        <img src={require("../assets/images/Logo.png")} alt="Logo" />
+        <Box onClick={() => navigate("/")}>
+          <img src={require("../assets/images/Logo.png")} alt="Logo" />
+        </Box>
         <BoxContentHeader>
           <Button>
             <TypographyeText>GIỎ HÀNG</TypographyeText>
@@ -95,21 +120,28 @@ export default function HeaderComponent() {
           >
             1
           </Box>
-          <Button>
-            <TypographyeText>ĐĂNG NHẬP</TypographyeText>
-          </Button>
-          <Box
-            style={{
-              borderRight: "2px solid #A0A0A0",
-              width: "1px",
-              color: "#FFFFFF",
-            }}
-          >
-            1
-          </Box>
-          <Button>
-            <TypographyeText>ĐĂNG KÝ</TypographyeText>
-          </Button>
+          {userInfo?.name ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <TypographyeText>Xin chào : </TypographyeText>
+              <Button>{userInfo.name}</Button>
+            </Box>
+          ) : (
+            <Button onClick={() => navigate("/login")}>
+              <TypographyeText>ĐĂNG NHẬP</TypographyeText>
+            </Button>
+          )}
+
+          {!userInfo?.name && (
+            <Button>
+              <TypographyeText>ĐĂNG KÝ</TypographyeText>
+            </Button>
+          )}
         </BoxContentHeader>
         <Popper id={id} open={open} anchorEl={anchorEl}>
           <Box
@@ -117,68 +149,34 @@ export default function HeaderComponent() {
               border: 1,
               p: 1,
               bgcolor: "background.paper",
-              display: "flex",
-              width: "870px",
-              height: "288px",
-              justifyContent: "space-evenly",
+              minWidth: "470px",
+              maxWidth: "670px",
+              minHeight: "120px",
+              // maxHeight: "200px",
               boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.6)",
             }}
           >
-            <Box>
-              <TypographyeText sx={{ marginBottom: "30px", marginTop: "20px" }}>
-                GARAGE
-              </TypographyeText>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Thành Công</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Trần Ngoc</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Tấn Thịnh Vượng</typographySelect>
-              </Box>
-            </Box>
-            <Box>
-              <TypographyeText sx={{ marginBottom: "30px", marginTop: "20px" }}>
-                GARAGE
-              </TypographyeText>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Thành Công</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Trần Ngoc</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Tấn Thịnh Vượng</typographySelect>
-              </Box>
-            </Box>
-            <Box>
-              <TypographyeText sx={{ marginBottom: "30px", marginTop: "20px" }}>
-                GARAGE
-              </TypographyeText>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Thành Công</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Trần Ngoc</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Tấn Thịnh Vượng</typographySelect>
-              </Box>
-            </Box>
-            <Box>
-              <TypographyeText sx={{ marginBottom: "30px", marginTop: "20px" }}>
-                GARAGE
-              </TypographyeText>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Thành Công</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Trần Ngoc</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Tấn Thịnh Vượng</typographySelect>
-              </Box>
+            <TypographyeText sx={{ marginBottom: "30px", marginTop: "20px" }}>
+              DỊCH VỤ
+            </TypographyeText>
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
+              }}
+            >
+              {services.map((e) => (
+                <Box
+                  onClick={() => {
+                    navigate(`/services/?${e?.serviceTypeId}`);
+                    setAnchorEl(null);
+                  }}
+                  sx={{ marginBottom: "15px", width: "40%" }}
+                >
+                  <typographySelect>{e?.serviceTypeName}</typographySelect>
+                </Box>
+              ))}
             </Box>
           </Box>
         </Popper>
@@ -188,68 +186,34 @@ export default function HeaderComponent() {
               border: 1,
               p: 1,
               bgcolor: "background.paper",
-              display: "flex",
-              width: "870px",
-              height: "288px",
-              justifyContent: "space-evenly",
+              minWidth: "470px",
+              maxWidth: "670px",
+              minHeight: "120px",
+              // maxHeight: "200px",
               boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.6)",
             }}
           >
-            <Box>
-              <TypographyeText sx={{ marginBottom: "30px", marginTop: "20px" }}>
-                GARAGE
-              </TypographyeText>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Thành Công</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Trần Ngoc</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Tấn Thịnh Vượng</typographySelect>
-              </Box>
-            </Box>
-            <Box>
-              <TypographyeText sx={{ marginBottom: "30px", marginTop: "20px" }}>
-                GARAGE
-              </TypographyeText>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Thành Công</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Trần Ngoc</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Tấn Thịnh Vượng</typographySelect>
-              </Box>
-            </Box>
-            <Box>
-              <TypographyeText sx={{ marginBottom: "30px", marginTop: "20px" }}>
-                GARAGE
-              </TypographyeText>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Thành Công</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Trần Ngoc</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Tấn Thịnh Vượng</typographySelect>
-              </Box>
-            </Box>
-            <Box>
-              <TypographyeText sx={{ marginBottom: "30px", marginTop: "20px" }}>
-                GARAGE
-              </TypographyeText>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Thành Công</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Trần Ngoc</typographySelect>
-              </Box>
-              <Box sx={{ marginBottom: "15px" }}>
-                <typographySelect>Garage Tấn Thịnh Vượng</typographySelect>
-              </Box>
+            <TypographyeText sx={{ marginBottom: "30px", marginTop: "20px" }}>
+              SẢN PHẨM
+            </TypographyeText>
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
+              }}
+            >
+              {product.map((e) => (
+                <Box
+                  onClick={() => {
+                    navigate(`/gear/?${e?.productTypeId}`);
+                    setIsAnchorEl(null);
+                  }}
+                  sx={{ marginBottom: "15px", width: "40%" }}
+                >
+                  <typographySelect>{e?.productTypeName}</typographySelect>
+                </Box>
+              ))}
             </Box>
           </Box>
         </Popper>

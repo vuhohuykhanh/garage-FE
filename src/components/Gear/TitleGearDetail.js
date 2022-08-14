@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Typography, Input, Avatar, Button, Popper } from "@mui/material";
-export default function TitleService({ services }) {
-  console.log(services[0]);
+export default function TitleGearDetail({ product }) {
   return (
     <Box
       width="90.4%"
@@ -23,10 +22,9 @@ export default function TitleService({ services }) {
                 marginBottom: "133px",
               }}
             >
-              {services[0]?.name}
+              {product?.name}
             </Typography>
-
-            {services[0]?.sale ? (
+            {product?.sale ? (
               <Box>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Typography
@@ -87,12 +85,11 @@ export default function TitleService({ services }) {
                     marginLeft: "61px",
                   }}
                 >
-                  {services[0]?.price}
+                  {product?.price}
                 </Typography>
               </Box>
             )}
-
-            <Box
+            {/* <Box
               width="100%"
               sx={{
                 display: "flex",
@@ -100,7 +97,31 @@ export default function TitleService({ services }) {
                 marginTop: "45px",
               }}
             >
-              <Button variant="contained">Đặt lịch</Button>
+              <Button
+                variant="contained"
+                sx={{
+                  width: "200px",
+                  background:
+                    "linear-gradient(180deg, rgba(241, 39, 17, 0.89) 0%, rgba(252, 181, 30, 0.72) 100%)",
+                }}
+              >
+                Mua ngay
+              </Button>
+            </Box> */}
+            <Box
+              width="410px"
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "45px",
+              }}
+            >
+              <Button
+                variant="contained"
+                sx={{ width: "200px", background: "#0486FF" }}
+              >
+                Thêm vào giỏ hàng
+              </Button>
             </Box>
           </Box>
         </Box>
