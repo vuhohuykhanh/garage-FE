@@ -13,6 +13,8 @@ import {
   API_GET_PRODUCT_BY_TYPE,
   API_GET_PRODUCT_BY_ID,
   API_GET_ALL_PRODUCT_TYPE,
+  API_UPDATE_PRODUCT_BY_ID,
+  API_DELETE_PRODUCT_BY_ID,
   API_CREATE_PRODUCT_TYPE,
   API_GET_ALL_ROLE,
   API_CREATE_ROLE,
@@ -20,13 +22,15 @@ import {
   API_GET_ALL_SERVICE,
   API_GET_SERVICE_BY_TYPE,
   API_GET_SERVICE_BY_ID,
+  API_UPDATE_SERVICE_BY_ID,
+  API_DELETE_SERVICE_BY_ID,
   API_GET_ALL_SERVICE_TYPE,
   API_CREATE_SERVICE_TYPE,
-} from "./configs";
-import axios from "axios";
+} from './configs';
+import axios from 'axios';
 
 export const getUserInfoV2 = async () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   try {
     const response = await axios.get(API_GET_INFO_USER, {
@@ -55,6 +59,7 @@ export const getAllServiceAPI = async () => {
     return error?.response?.data || error;
   }
 };
+
 export const getAllServiceTypeAPI = async () => {
   try {
     const response = await axios.get(API_GET_ALL_SERVICE_TYPE);
@@ -63,6 +68,7 @@ export const getAllServiceTypeAPI = async () => {
     return error?.response?.data || error;
   }
 };
+
 export const getAServiceByTypeAPI = async (id) => {
   try {
     const response = await axios.get(
@@ -73,11 +79,57 @@ export const getAServiceByTypeAPI = async (id) => {
     return error?.response?.data || error;
   }
 };
+
 export const getAServiceByIDAPI = async (id) => {
   try {
     const response = await axios.get(
       `${API_GET_SERVICE_BY_ID}?serviceId=${id}`
     );
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+
+export const updateServiceByIDAPI = async (id) => {
+  try {
+    const response = await axios.patch(`${API_UPDATE_SERVICE_BY_ID}/${id}`);
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+
+export const deleteServiceByIDAPI = async (id) => {
+  try {
+    const response = await axios.delete(`${API_DELETE_SERVICE_BY_ID}/${id}`);
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+
+export const getAllProductAPI = async () => {
+  try {
+    const response = await axios.get(API_GET_ALL_PRODUCT);
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+
+export const updateProductByIDAPI = async (id) => {
+  try {
+    const response = await axios.get(`${API_UPDATE_PRODUCT_BY_ID}/${id}`);
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+
+export const deleteProductByIDAPI = async (id) => {
+  try {
+    const response = await axios.delete(`${API_DELETE_PRODUCT_BY_ID}/${id}`);
     return response;
   } catch (error) {
     return error?.response?.data || error;
@@ -92,6 +144,7 @@ export const getAllProductTypeAPI = async () => {
     return error?.response?.data || error;
   }
 };
+
 export const getProductByTypeAPI = async (id) => {
   try {
     const response = await axios.get(

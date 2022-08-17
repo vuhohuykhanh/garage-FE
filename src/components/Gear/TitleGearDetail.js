@@ -1,66 +1,70 @@
-import React from "react";
-import { Box, Typography, Input, Avatar, Button, Popper } from "@mui/material";
+import React from 'react';
+import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
 export default function TitleGearDetail({ product }) {
   return (
     <Box
-      width="90.4%"
+      width="80%"
       m="auto"
       sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        marginBottom: "133px",
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: '133px',
       }}
     >
-      <img src={require("../../assets/images/bg1.png")} />
-      <Box width="90%" sx={{}}>
-        <Box width="100%" sx={{ display: "flex", justifyContent: "center" }}>
+      <img
+        className="detail_image"
+        src={require('../../assets/images/bg1.png')}
+        alt="detail_img"
+      />
+      <Box width="80%" sx={{}}>
+        <Box width="100%" sx={{ display: 'flex', justifyContent: 'center' }}>
           <Box>
             <Typography
               style={{
-                fontSize: "35px",
-                fontWeight: "700",
-                marginBottom: "133px",
+                fontSize: '35px',
+                fontWeight: '700',
+                marginBottom: '133px',
               }}
             >
               {product?.name}
             </Typography>
             {product?.sale ? (
               <Box>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Typography
                     style={{
-                      fontSize: "25px",
-                      fontWeight: "700",
+                      fontSize: '25px',
+                      fontWeight: '700',
                     }}
                   >
                     Giá cũ:
                   </Typography>
                   <Typography
                     style={{
-                      fontSize: "25px",
-                      fontWeight: "700",
-                      color: "#ABABAB",
-                      marginLeft: "61px",
+                      fontSize: '25px',
+                      fontWeight: '700',
+                      color: '#ABABAB',
+                      marginLeft: '61px',
                     }}
                   >
                     2.300.000đ
                   </Typography>
                 </Box>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Typography
                     style={{
-                      fontSize: "25px",
-                      fontWeight: "700",
+                      fontSize: '25px',
+                      fontWeight: '700',
                     }}
                   >
                     Giá KM:
                   </Typography>
                   <Typography
                     style={{
-                      fontSize: "30px",
-                      fontWeight: "700",
-                      color: "#0486FF",
-                      marginLeft: "61px",
+                      fontSize: '30px',
+                      fontWeight: '700',
+                      color: '#0486FF',
+                      marginLeft: '61px',
                     }}
                   >
                     1.490.000đ
@@ -68,24 +72,24 @@ export default function TitleGearDetail({ product }) {
                 </Box>
               </Box>
             ) : (
-              <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Typography
                   style={{
-                    fontSize: "25px",
-                    fontWeight: "700",
+                    fontSize: '25px',
+                    fontWeight: '700',
                   }}
                 >
                   Giá :
                 </Typography>
                 <Typography
                   style={{
-                    fontSize: "30px",
-                    fontWeight: "700",
-                    color: "#0486FF",
-                    marginLeft: "61px",
+                    fontSize: '30px',
+                    fontWeight: '700',
+                    color: '#0486FF',
+                    marginLeft: '61px',
                   }}
                 >
-                  {product?.price}
+                  {product?.price} đ
                 </Typography>
               </Box>
             )}
@@ -111,14 +115,14 @@ export default function TitleGearDetail({ product }) {
             <Box
               width="410px"
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "45px",
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '45px',
               }}
             >
               <Button
                 variant="contained"
-                sx={{ width: "200px", background: "#0486FF" }}
+                sx={{ width: '200px', background: '#0486FF' }}
               >
                 Thêm vào giỏ hàng
               </Button>

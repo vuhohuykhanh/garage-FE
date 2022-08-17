@@ -1,3 +1,34 @@
+/* HEADER */
+.header-list:hover{
+	cursor:pointer;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.headerLogo:hover{
+	cursor: pointer;
+}
+
+/* PRODUCT */
+.productCard{
+	border: 1px solid #aaa;
+	border-radius: 8px;
+}
+
+.productCard:hover{
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* PRODUCT_DETAIL */
+.detail_image{
+	width:55%;
+}
+
+/* CART */
+.btnPay:hover{
+	background-color: rgba(236, 36, 36, 0.5) !important;
+}
+
 .footer-container {
     border-top: 3px solid #ccc;
     margin-top: 60px;
@@ -50,7 +81,7 @@
 .fanpage_footer-content {
     width: 90%;
     position: absolute;
-    bottom: 10px;
+	bottom: -8px;
     display: flex;
     justify-content: space-between;
 }

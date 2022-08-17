@@ -4,13 +4,12 @@ import {
   CardHeader,
   CardMedia,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 
 const ProductItem = (product) => {
-  
   return (
     <>
-      <Card sx={{ backgroundColor: "#FFF2DB" }}>
+      <Card sx={{ backgroundColor: '#FFF2DB', height: '300px' }}>
         <CardHeader
           title={
             <Typography variant="subtitle1" fontWeight={600} align="center">
@@ -25,7 +24,7 @@ const ProductItem = (product) => {
           alt="green iguana"
         />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" marginTop="16px">
             {product.description}
           </Typography>
         </CardContent>
