@@ -1,14 +1,19 @@
-import { Box, Grid } from "@mui/material";
-import ProductItem from "./ProductItem";
-import { ExampleProducts } from "./utils";
+import { Box, Grid } from '@mui/material';
+import ProductItem from './ProductItem';
+import { ExampleProducts, ExampleProducts2 } from './utils';
 
-const Products = () => {
-  const products = ExampleProducts();
+const Products = ({ data }) => {
+  let products;
+  if (data === 'suachua') {
+    products = ExampleProducts();
+  } else {
+    products = ExampleProducts2();
+  }
 
   return (
     <Box sx={{ flexGrow: 1, mb: 12, mt: 2 }}>
-      <Grid container spacing={2}>
-        {products.map((product) => (
+      <Grid container spacing={6}>
+        {products?.map((product) => (
           <Grid item xs={6} md={3}>
             {ProductItem(product)}
           </Grid>

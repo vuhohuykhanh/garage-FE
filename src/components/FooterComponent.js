@@ -1,7 +1,7 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
-import style from "./style.css";
-import { Box, Typography, Grid, Paper } from "@mui/material";
+import React from 'react';
+import { styled } from '@mui/material/styles';
+import style from './style.css';
+import { Box, Typography, Grid, Paper } from '@mui/material';
 // import PublicIcon from '@material-ui/icons/Public';
 // import PhoneIcon from '@material-ui/icons/Phone';
 // import MailOutlineIcon from '@material-ui/icons/MailOutline';
@@ -9,10 +9,10 @@ import { Box, Typography, Grid, Paper } from "@mui/material";
 // import ShareIcon from '@material-ui/icons/Share';
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: "center",
+  textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
 
@@ -25,7 +25,7 @@ export default function FooterComponent() {
             <Grid item xs={5}>
               <img
                 className="logo-footer"
-                src={require("../assets/images/Logo-footer.jpg")}
+                src={require('../assets/images/Logo-footer.jpg')}
                 alt="Logo"
               />
             </Grid>
@@ -47,15 +47,15 @@ export default function FooterComponent() {
           </Grid>
           <Grid item xs={3}>
             <h3>LIÊN HỆ</h3>
-            <p style={{ display: "flex", alignItems: "center" }}>
+            <p style={{ display: 'flex', alignItems: 'center' }}>
               {/* <MailOutlineIcon style={{ marginRight: 10 }} /> */}
               info@enmasys.com
             </p>
-            <p style={{ display: "flex", alignItems: "center" }}>
+            <p style={{ display: 'flex', alignItems: 'center' }}>
               {/* <PhoneIcon style={{ marginRight: 10 }} /> */}
               098 998 7774
             </p>
-            <p style={{ display: "flex", alignItems: "center" }}>
+            <p style={{ display: 'flex', alignItems: 'center' }}>
               {/* <PublicIcon style={{ marginRight: 10 }} /> */}
               https://www.enmasys.com/
             </p>
@@ -65,14 +65,14 @@ export default function FooterComponent() {
             <Typography component="div" className="fanpage_container">
               <img
                 className="fanpage_background"
-                src={require("../assets/images/icon_fanpage.jpg")}
+                src={require('../assets/images/icon_fanpage.jpg')}
                 alt=""
               ></img>
               <Typography component="div" className="fanpage_header">
                 <a href="https://www.facebook.com/enmasys">
                   <img
                     className="fanpage_header-avatar"
-                    src={require("../assets/images/Logo-footer.jpg")}
+                    src={require('../assets/images/Logo-footer.jpg')}
                     alt=""
                   ></img>
                 </a>
@@ -111,10 +111,10 @@ export default function FooterComponent() {
 }
 
 const BoxContainer = styled(Box)({
-  width: "85%",
-  backgroundColor: "#FFFFFF",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  margin: "40px auto",
+  width: '85%',
+  backgroundColor: '#FFFFFF',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  margin: '40px auto',
 });

@@ -1,4 +1,4 @@
-const BASE_URL = "http://192.168.1.8:5000";
+const BASE_URL = 'http://192.168.1.5:5000';
 
 //account
 export const API_GET_INFO_USER = `${BASE_URL}/api/user/get-user-info`;
@@ -23,6 +23,8 @@ export const API_GET_ALL_PRODUCT = `${BASE_URL}/api/product/get-all`;
 export const API_GET_PRODUCT_BY_ID_MANUFACTURER = `${BASE_URL}/api/product/get-product-by-manufacturer`;
 export const API_GET_PRODUCT_BY_TYPE = `${BASE_URL}/api/product/get-product-by-type`;
 export const API_GET_PRODUCT_BY_ID = `${BASE_URL}/api/product/get-product-by-id`;
+export const API_UPDATE_PRODUCT_BY_ID = `${BASE_URL}/api/product/update`;
+export const API_DELETE_PRODUCT_BY_ID = `${BASE_URL}/api/product/delete`;
 
 // product type
 
@@ -40,6 +42,8 @@ export const API_CREATE_SERVICE = `${BASE_URL}/api/service/create`;
 export const API_GET_ALL_SERVICE = `${BASE_URL}/api/service/get-all`;
 export const API_GET_SERVICE_BY_TYPE = `${BASE_URL}/api/service/get-service-by-type`;
 export const API_GET_SERVICE_BY_ID = `${BASE_URL}/api/service/get-service-by-id`;
+export const API_UPDATE_SERVICE_BY_ID = `${BASE_URL}/api/service/update`;
+export const API_DELETE_SERVICE_BY_ID = `${BASE_URL}/api/service/delete`;
 
 // service type
 
