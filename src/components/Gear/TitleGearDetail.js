@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
 export default function TitleGearDetail({ product }) {
+  console.log(product);
   return (
     <Box
       width="80%"
@@ -28,7 +29,7 @@ export default function TitleGearDetail({ product }) {
             >
               {product?.name}
             </Typography>
-            {product?.sale ? (
+            {product?.saledescription.length ? (
               <Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Typography
@@ -45,9 +46,10 @@ export default function TitleGearDetail({ product }) {
                       fontWeight: '700',
                       color: '#ABABAB',
                       marginLeft: '61px',
+                      textDecoration: 'line-through',
                     }}
                   >
-                    2.300.000đ
+                    {product?.price} đ
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -67,7 +69,11 @@ export default function TitleGearDetail({ product }) {
                       marginLeft: '61px',
                     }}
                   >
-                    1.490.000đ
+                    {product?.price -
+                      (product?.price *
+                        product?.saledescription?.[0]?.salePercent) /
+                        100}{' '}
+                    đ
                   </Typography>
                 </Box>
               </Box>

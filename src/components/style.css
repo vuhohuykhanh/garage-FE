@@ -12,6 +12,7 @@
 .productCard{
 	border: 1px solid #aaa;
 	border-radius: 8px;
+	min-height: 400px;
 }
 
 .productCard:hover{
@@ -22,6 +23,21 @@
 /* PRODUCT_DETAIL */
 .detail_image{
 	width:55%;
+}
+
+.typical_price{
+	text-decoration: line-through;
+	font-size: 16px;
+	font-weight: 400;
+	color: #B4B4B4;
+	margin-bottom: -32px !important;
+}
+
+.sale_price{
+	margin-top: 32px !important;
+	font-size: 25px !important;
+	font-weight: 700 !important;
+	color: #0486FF;
 }
 
 /* CART */

@@ -39,19 +39,31 @@ const ProductItemService = (product) => {
           <Box>
             <Typography
               variant="body2"
-              sx={{ fontSize: '16px', fontWeight: '400', color: '#B4B4B4' }}
+              className={
+                product?.saledescription?.[0]?.salePercent
+                  ? 'typical_price'
+                  : 'sale_price'
+              }
             >
               {product.price} đ
             </Typography>
-            <Typography
-              variant="body2"
-              sx={{ fontSize: '25px', fontWeight: '700', color: '#0486FF' }}
-            >
-              {product.priceSale}
+            <Typography variant="body2" className="sale_price">
+              {product?.saledescription?.[0]?.salePercent
+                ? product.price -
+                  (product.price * product?.saledescription?.[0]?.salePercent) /
+                    100
+                : ''}
             </Typography>
           </Box>
           <Box sx={{ position: 'relative' }}>
-            <img src={require('../../assets/images/iconSale.png')} />
+            {product?.saledescription?.[0]?.salePercent ? (
+              <img
+                src={require('../../assets/images/iconSale.png')}
+                alt="sale_img"
+              />
+            ) : (
+              ''
+            )}
             <Typography
               sx={{
                 position: 'absolute',
@@ -60,7 +72,8 @@ const ProductItemService = (product) => {
                 transform: 'translate(-50%, -50%)',
               }}
             >
-              {product.sale}
+              {product?.saledescription?.[0]?.salePercent}
+              {product?.saledescription?.[0]?.salePercent ? '%' : ''}
             </Typography>
           </Box>
         </CardContent>

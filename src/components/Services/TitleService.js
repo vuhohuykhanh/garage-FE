@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
 export default function TitleService({ services }) {
-  console.log(services[0]);
   return (
     <Box
       width="80%"
@@ -30,7 +29,7 @@ export default function TitleService({ services }) {
               {services[0]?.name}
             </Typography>
 
-            {services[0]?.sale ? (
+            {services[0]?.saledescription.length ? (
               <Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Typography
@@ -47,9 +46,10 @@ export default function TitleService({ services }) {
                       fontWeight: '700',
                       color: '#ABABAB',
                       marginLeft: '61px',
+                      textDecoration: 'line-through',
                     }}
                   >
-                    2.300.000đ
+                    {services[0]?.price} đ
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -69,7 +69,11 @@ export default function TitleService({ services }) {
                       marginLeft: '61px',
                     }}
                   >
-                    1.490.000đ
+                    {services[0]?.price -
+                      (services[0]?.price *
+                        services?.[0]?.saledescription?.[0]?.salePercent) /
+                        100}{' '}
+                    đ
                   </Typography>
                 </Box>
               </Box>
