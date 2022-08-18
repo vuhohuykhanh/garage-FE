@@ -172,6 +172,7 @@ export default function HeaderComponent({ userInfo }) {
             >
               {services?.map((e) => (
                 <Box
+                  key={e?.serviceTypeId}
                   className="header-list"
                   onClick={() => {
                     navigate(`/services/?${e?.serviceTypeId}`);
@@ -213,6 +214,7 @@ export default function HeaderComponent({ userInfo }) {
             >
               {product?.map((e) => (
                 <Box
+                  key={e?.productTypeId}
                   className="header-list"
                   onClick={() => {
                     navigate(`/gear/?${e?.productTypeId}`);
@@ -238,7 +240,7 @@ export default function HeaderComponent({ userInfo }) {
         }}
       >
         {arrLogo.map((item, index) => (
-          <img src={item?.image} />
+          <img key={index} src={item?.image} />
         ))}
       </Box>
     </Box>
