@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
 export default function TitleGearDetail({ product }) {
-  console.log(product);
   return (
     <Box
       width="80%"

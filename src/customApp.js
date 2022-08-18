@@ -34,7 +34,7 @@ export function CustomerApp() {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent userInfo={userInfo} />
       <div>
         <Outlet />
       </div>
