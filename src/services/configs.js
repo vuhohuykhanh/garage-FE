@@ -1,11 +1,15 @@
-//const BASE_URL = 'http://192.168.1.7:5000';
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = "http://192.168.1.11:5000";
+// const BASE_URL = 'http://localhost:5000';
 
 //account
 export const API_GET_INFO_USER = `${BASE_URL}/api/user/get-user-info`;
 export const API_UPDATE_INFO_USER = `${BASE_URL}/api/user/update`;
 export const API_SIGNIN = `${BASE_URL}/api/account/signin`;
 export const API_SIGNUP = `${BASE_URL}/api/account/signup`;
+
+export const API_UPDATE_PASSWORD = `${BASE_URL}/api/user/updatePassword`;
+
+
 
 // description
 
@@ -50,3 +54,7 @@ export const API_DELETE_SERVICE_BY_ID = `${BASE_URL}/api/service/delete`;
 
 export const API_GET_ALL_SERVICE_TYPE = `${BASE_URL}/api/serviceType/get-all`;
 export const API_CREATE_SERVICE_TYPE = `${BASE_URL}/api/serviceType/create`;
+
+//cart
+
+export const API_CREATE_CART_MAIN = `${BASE_URL}/api/cart/create`;

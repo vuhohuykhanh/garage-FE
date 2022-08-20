@@ -21,6 +21,10 @@ import AlertTitle from "@mui/material/AlertTitle";
 // import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
+import { getUserInfoV2 } from "../../services/index";
+import { useNavigate } from "react-router-dom";
+
+import { updatePasswordAPI, updateInfoAPI } from "../../services/index";
 
 // import AppAvatar from '../../myTool/handleAvatar';
 // import axios from 'axios'
@@ -41,10 +45,76 @@ function Infor() {
 
   const [confirmPass, setConfirmPass] = useState("");
   const [isValidConfirmPass, setIsValidConfirmPass] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [reNewPassword, setReNewPassword] = useState("");
+  const navigate = useNavigate();
 
-  //   const dispatch = useDispatch();
-  //   const username = useSelector((state) => state.infor.username);
+  const checkLogin = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  };
 
+  const getUserInfo = async () => {
+    const response = await getUserInfoV2();
+    if (response.status === 200) {
+      setUserInfo(response.data);
+    } else {
+      setUserInfo(null);
+    }
+  };
+
+  const updatePassword = async () => {
+    if (password !== "" && newPassword !== "" && reNewPassword !== "") {
+      if (newPassword === reNewPassword) {
+        try {
+          const body = {
+            idCardNumber: userInfo?.idCardNumber,
+            _id: userInfo?._id,
+            password: password,
+            newPassword: newPassword,
+          };
+          const res = await updatePasswordAPI(body);
+          if (res === 200) {
+            console.log("doi pass thanh cong");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+  };
+
+  const updateInfo = async () => {
+    if (name !== "" && phone !== "" && email !== "" && address !== "") {
+      try {
+        const body = {
+          idCardNumber: userInfo?.idCardNumber,
+          _id: userInfo?._id,
+          name: name,
+          address: address,
+          phoneNumber: phone,
+          email: email,
+        };
+        const res = await updateInfoAPI(body);
+        if (res === 200) {
+          console.log("doi pass thanh cong");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
   //HANDLE AVARTAR
   const handleUploadAvatar = () => {
     inputFile.current.click();
@@ -85,86 +155,73 @@ function Infor() {
                   </IconButton>
                 }
               >
-                {/* <AppAvatar url={userInfo.avatar} imgSize={100} /> */}
+                <img src={userInfo?.avatar} />
               </Badge>
             </div>
             <Grid container rowSpacing={2}>
-              <Grid item={true} container direction="row" columnSpacing={3}>
-                <Grid item={true} md={6}>
-                  <TextField
-                    label="Mã"
-                    color="primary"
-                    fullWidth={true}
-                    focused
-                    disabled={true}
-                    value={userInfo.userCode || ""}
-                  />
-                </Grid>
-                <Grid item={true} md={6}>
-                  <TextField
-                    label="Thuộc"
-                    color="primary"
-                    fullWidth={true}
-                    focused
-                    disabled={true}
-                    value={userInfo.userClass || ""}
-                  />
-                </Grid>
-              </Grid>
+              <Grid
+                item={true}
+                container
+                direction="row"
+                columnSpacing={3}
+              ></Grid>
               <Grid item={true} container direction="row" columnSpacing={3}>
                 <Grid item={true} md={6}>
                   <TextField
                     label="Họ tên"
                     color="primary"
                     fullWidth={true}
-                    focused
-                    disabled={true}
-                    value={userInfo.fullname || ""}
+                    value={userInfo.name || ""}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </Grid>
                 <Grid item={true} md={6}>
                   <TextField
+                    label="Điện thoại"
+                    color="primary"
+                    fullWidth={true}
+                    value={userInfo.phoneNumber || ""}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </Grid>
+                {/* <Grid item={true} md={6}>
+                  <TextField
                     label="Giới tính"
                     color="primary"
                     fullWidth={true}
-                    focused
-                    disabled={true}
                     value={userInfo.gender === 1 ? "Nam" : "Nữ"}
                   />
-                </Grid>
+                </Grid> */}
               </Grid>
               <Grid item={true} md={12}>
                 <TextField
                   label="Email"
                   color="primary"
                   fullWidth={true}
-                  focused
-                  disabled={true}
                   value={userInfo.email || ""}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
-              <Grid item={true} md={12}>
-                <TextField
-                  label="Điện thoại"
-                  color="primary"
-                  fullWidth={true}
-                  focused
-                  disabled={true}
-                  value={userInfo.phone || ""}
-                />
-              </Grid>
+
               <Grid item={true} md={12}>
                 <TextField
                   label="Địa chỉ"
                   color="primary"
                   fullWidth={true}
-                  focused
-                  disabled={true}
                   value={userInfo.address || ""}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
               </Grid>
-              <Grid item={true} md={12}>
-                <Button variant="contained">Đổi mật khẩu</Button>
+              <Grid item={true} md={6}>
+                <Button variant="contained" onClick={updateInfo}>
+                  đổi thông tin người dùng
+                </Button>
+              </Grid>
+
+              <Grid item={true} md={6}>
+                <Button variant="contained" onClick={() => setOpen(true)}>
+                  Đổi mật khẩu
+                </Button>
                 <Dialog
                   open={open}
                   //   onClose={handleClose}
@@ -180,9 +237,9 @@ function Infor() {
                         label="Mật khẩu cũ"
                         color="primary"
                         fullWidth={true}
-                        focused
                         margin="dense"
                         // onChange={handleChangeOldPass}
+
                         error={isValidOldPass}
                         helperText={
                           !isValidOldPass ? "" : "Mật khẩu không hợp lệ"
@@ -194,8 +251,6 @@ function Infor() {
                         label="Địa chỉ"
                         color="primary"
                         fullWidth={true}
-                        focused
-                        disabled={true}
                         value={userInfo.address}
                       />
                     </Grid>
@@ -216,9 +271,9 @@ function Infor() {
                               label="Mật khẩu cũ"
                               color="primary"
                               fullWidth={true}
-                              focused
                               margin="dense"
                               //   onChange={handleChangeOldPass}
+                              onChange={(e) => setPassword(e.target.value)}
                               error={isValidOldPass}
                               helperText={
                                 !isValidOldPass ? "" : "Mật khẩu không hợp lệ"
@@ -231,9 +286,9 @@ function Infor() {
                                 label="Mật khẩu mới"
                                 color="success"
                                 fullWidth={true}
-                                focused
                                 margin="dense"
                                 // onChange={handleChangeNewPass}
+                                onChange={(e) => setNewPassword(e.target.value)}
                                 error={isValidNewPass}
                                 helperText={!isValidNewPass ? "" : messApi}
                               />
@@ -241,9 +296,11 @@ function Infor() {
                                 label="Nhập lại mật khẩu mới"
                                 color="success"
                                 fullWidth={true}
-                                focused
                                 margin="dense"
                                 // onChange={handleChangeConfirmdPass}
+                                onChange={(e) =>
+                                  setReNewPassword(e.target.value)
+                                }
                                 error={isValidConfirmPass}
                                 helperText={
                                   !isValidConfirmPass
@@ -254,12 +311,10 @@ function Infor() {
                             </div>
                           </DialogContentText>
                         </DialogContent>
-                        {/* <DialogActions>
-                                                    <Button onClick={handleClose}>Hủy</Button>
-                                                    <Button onClick={verification} autoFocus>
-                                                        Xác nhận
-                                                    </Button>
-                                                </DialogActions> */}
+                        <DialogActions>
+                          <Button onClick={() => setOpen(false)}>Hủy</Button>
+                          <Button onClick={updatePassword}>Xác nhận</Button>
+                        </DialogActions>
                       </Dialog>
                     </Grid>
                   </DialogContent>

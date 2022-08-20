@@ -26,11 +26,13 @@ import {
   API_DELETE_SERVICE_BY_ID,
   API_GET_ALL_SERVICE_TYPE,
   API_CREATE_SERVICE_TYPE,
-} from './configs';
-import axios from 'axios';
+  API_CREATE_CART_MAIN,
+  API_UPDATE_PASSWORD,
+} from "./configs";
+import axios from "axios";
 
 export const getUserInfoV2 = async () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   try {
     const response = await axios.get(API_GET_INFO_USER, {
       headers: { authorization: `Bearer ${token}` },
@@ -164,6 +166,34 @@ export const getProductByIDAPI = async (id) => {
     return error?.response?.data || error;
   }
 };
+//API_CREATE_CART_MAIN
+export const createCartAPI = async (body) => {
+  try {
+    const response = await axios.post(API_CREATE_CART_MAIN, body);
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+
+export const updatePasswordAPI = async (body) => {
+  try {
+    const response = await axios.patch(API_UPDATE_PASSWORD, body);
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+
+export const updateInfoAPI = async (body) => {
+  try {
+    const response = await axios.patch(API_UPDATE_INFO_USER, body);
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+
 
 // const userInfov2 = new UserInfov2();
 // export default userInfov2;

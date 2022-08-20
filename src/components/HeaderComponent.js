@@ -8,7 +8,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { getAllServiceTypeAPI, getAllProductTypeAPI } from '../services/index';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const arrLogo = [
   {
@@ -110,7 +110,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
           </Box>
           <Button onClick={handleClick}>
             <TypographyeText>Dịch vụ</TypographyeText>
-            <ArrowDropDownIcon color="action" />
+            {/* <ArrowDropDownIcon color="action" /> */}
           </Button>
           <Box
             style={{
@@ -123,7 +123,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
           </Box>
           <Button onClick={handleClick1}>
             <TypographyeText>PHỤ KIỆN</TypographyeText>
-            <ArrowDropDownIcon color="action" />
+            {/* <ArrowDropDownIcon color="action" /> */}
           </Button>
         </BoxContentHeader>
         <Box className="headerLogo" onClick={() => navigate('/')}>
