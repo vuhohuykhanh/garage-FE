@@ -39,7 +39,7 @@ const arrLogo = [
     image: require('../assets/images/honda11.png'),
   },
 ];
-export default function HeaderComponent({ userInfo }) {
+export default function HeaderComponent({ userInfo, setUserInfo }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isAnchorEl, setIsAnchorEl] = React.useState(null);
 
@@ -82,6 +82,7 @@ export default function HeaderComponent({ userInfo }) {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setAnchorElProfile(false);
+    setUserInfo(null);
     navigate('/login');
   };
 
