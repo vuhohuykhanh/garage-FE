@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
 import ProductInCart from './ProductInCart';
+import { useEffect } from 'react';
 
 const mockData = [
   {
@@ -23,11 +24,9 @@ const mockData = [
   },
 ];
 export default function Cart() {
-  const items = JSON.parse(localStorage.getItem('items'));
+  const storageItems = JSON.parse(localStorage.getItem('items'));
 
-  const loadData = () => {
-	
-  }
+  const [items, setItems] = useState(storageItems || []);
 
   return (
     <Box>
@@ -122,7 +121,7 @@ export default function Cart() {
         </Box>
       </Box>
       {items?.map((item) => (
-        <ProductInCart item={item} />
+        <ProductInCart item={item} setItems={setItems} />
       ))}
 
       <Box

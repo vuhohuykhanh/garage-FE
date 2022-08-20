@@ -29,7 +29,7 @@ export function CustomerApp() {
 
   useEffect(() => {
     getUserInfo();
-  }, [userInfo]);
+  }, []);
 
   return (
     <div>

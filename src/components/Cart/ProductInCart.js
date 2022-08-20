@@ -9,8 +9,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export default function ProductInCart({ item }) {
-  console.log(item);
+export default function ProductInCart({ item, setItems }) {
   const [quantity, setQuantity] = useState(item?.quantity);
 
   const handleIncrease = () => {
@@ -25,13 +24,11 @@ export default function ProductInCart({ item }) {
 
   const handleDeleteItem = () => {
     const items = JSON.parse(localStorage.getItem('items'));
-    console.log('items', items);
     const newItems = items?.filter(
       (value) => value.productId !== item?.productId
     );
-    console.log('afterDelete', newItems);
-    //console.log(`deleted item ${item?.productId}`);
     localStorage.setItem('items', JSON.stringify(newItems));
+    setItems(newItems);
   };
 
   return (
