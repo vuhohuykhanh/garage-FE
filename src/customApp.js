@@ -16,25 +16,28 @@ import { getUserInfoV2 } from './services/index';
 import React, { useEffect, useState } from 'react';
 
 export function CustomerApp() {
-  const [userInfo, setUserInfo] = useState({});
-  const [count, setCount] = useState(0);
+  const [userInfo, setUserInfo] = useState();
+
+  const getUserInfo = async () => {
+    const response = await getUserInfoV2();
+    if (response.status === 200) {
+      setUserInfo(response.data);
+    } else {
+      setUserInfo(null);
+    }
+  };
 
   useEffect(() => {
-    async function getUserInfo() {
-      const response = await getUserInfoV2();
-      if (response.status === 200) {
-        setUserInfo(response.data);
-        setCount(count + 1);
-      }
-    }
-    if (count === 0) {
-      getUserInfo();
-    }
-  }, []);
+    getUserInfo();
+  }, [userInfo]);
 
   return (
     <div>
-      <HeaderComponent userInfo={userInfo} />
+      <HeaderComponent
+        userInfo={userInfo}
+        setUserInfo={setUserInfo}
+        getUserInfo={getUserInfo}
+      />
       <div>
         <Outlet />
       </div>

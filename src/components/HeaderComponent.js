@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
@@ -38,9 +42,10 @@ const arrLogo = [
 export default function HeaderComponent({ userInfo }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isAnchorEl, setIsAnchorEl] = React.useState(null);
+
+  const [anchorElProfile, setAnchorElProfile] = React.useState(null);
   const [services, setServices] = React.useState([]);
   const [product, setProduct] = React.useState([]);
-  const [count, setCount] = useState(0);
   const navigate = useNavigate();
 
   async function getAllService() {
@@ -65,6 +70,21 @@ export default function HeaderComponent({ userInfo }) {
     setAnchorEl(null);
     setIsAnchorEl(isAnchorEl ? null : event.currentTarget);
   };
+
+  const handleMenu = () => {
+    setAnchorElProfile(true);
+  };
+
+  const handleClose = () => {
+    setAnchorElProfile(null);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setAnchorElProfile(false);
+    navigate('/login');
+  };
+
   const isOpen = Boolean(isAnchorEl);
   const open = Boolean(anchorEl);
 
@@ -131,6 +151,48 @@ export default function HeaderComponent({ userInfo }) {
             >
               <TypographyeText>Xin chào : </TypographyeText>
               <Button>{userInfo.name}</Button>
+              <div>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  sx={{ ml: '-150px', mt: '50px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElProfile}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElProfile)}
+                  onClose={handleClose}
+                  className="header_menuUser"
+                >
+                  <MenuItem
+                    className="header_menuUser-item"
+                    onClick={handleClose}
+                  >
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    className="header_menuUser-item"
+                    onClick={handleLogout}
+                  >
+                    Log out
+                  </MenuItem>
+                </Menu>
+              </div>
             </Box>
           ) : (
             <Button onClick={() => navigate('/login')}>
@@ -180,7 +242,7 @@ export default function HeaderComponent({ userInfo }) {
                   }}
                   sx={{ marginBottom: '15px', width: '40%' }}
                 >
-                  <typographySelect>{e?.serviceTypeName}</typographySelect>
+                  <TypographySelect>{e?.serviceTypeName}</TypographySelect>
                 </Box>
               ))}
             </Box>
@@ -222,7 +284,7 @@ export default function HeaderComponent({ userInfo }) {
                   }}
                   sx={{ marginBottom: '15px', width: '40%' }}
                 >
-                  <typographySelect>{e?.productTypeName}</typographySelect>
+                  <TypographySelect>{e?.productTypeName}</TypographySelect>
                 </Box>
               ))}
             </Box>
@@ -269,7 +331,7 @@ const TypographyeText = styled(Typography)({
   color: '#000000',
 });
 
-const typographySelect = styled(Typography)({
+const TypographySelect = styled(Typography)({
   fontSize: '15px',
   fontWeight: '400',
   color: '#000000',

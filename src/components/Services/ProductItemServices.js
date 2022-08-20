@@ -8,10 +8,14 @@ import {
   Box,
 } from '@mui/material';
 
-const ProductItemService = (product) => {
+const ProductItemService = (service) => {
   return (
     <>
-      <Card sx={{ backgroundColor: '#FFFFFF' }} className="productCard">
+      <Card
+        sx={{ backgroundColor: '#FFFFFF' }}
+        className="productCard"
+        key={service.serviceId}
+      >
         <CardMedia
           component="img"
           height="200"
@@ -25,7 +29,7 @@ const ProductItemService = (product) => {
               sx={{ fontSize: '18px', fontWeight: '700', color: '#000000' }}
               mt={2}
             >
-              {product.name}
+              {service.name}
             </Typography>
           }
         />
@@ -40,23 +44,23 @@ const ProductItemService = (product) => {
             <Typography
               variant="body2"
               className={
-                product?.saledescription?.[0]?.salePercent
+                service?.saledescription?.[0]?.salePercent
                   ? 'typical_price'
                   : 'sale_price'
               }
             >
-              {product.price} đ
+              {service.price} đ
             </Typography>
             <Typography variant="body2" className="sale_price">
-              {product?.saledescription?.[0]?.salePercent
-                ? product.price -
-                  (product.price * product?.saledescription?.[0]?.salePercent) /
+              {service?.saledescription?.[0]?.salePercent
+                ? service.price -
+                  (service.price * service?.saledescription?.[0]?.salePercent) /
                     100
                 : ''}
             </Typography>
           </Box>
           <Box sx={{ position: 'relative' }}>
-            {product?.saledescription?.[0]?.salePercent ? (
+            {service?.saledescription?.[0]?.salePercent ? (
               <img
                 src={require('../../assets/images/iconSale.png')}
                 alt="sale_img"
@@ -73,8 +77,8 @@ const ProductItemService = (product) => {
                 fontSize: '12px',
               }}
             >
-              {product?.saledescription?.[0]?.salePercent}
-              {product?.saledescription?.[0]?.salePercent ? '%' : ''}
+              {service?.saledescription?.[0]?.salePercent}
+              {service?.saledescription?.[0]?.salePercent ? '%' : ''}
             </Typography>
           </Box>
         </CardContent>

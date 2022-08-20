@@ -23,6 +23,12 @@ const mockData = [
   },
 ];
 export default function Cart() {
+  const items = JSON.parse(localStorage.getItem('items'));
+
+  const loadData = () => {
+	
+  }
+
   return (
     <Box>
       <Box>
@@ -115,7 +121,7 @@ export default function Cart() {
           </Typography>
         </Box>
       </Box>
-      {mockData?.map((item) => (
+      {items?.map((item) => (
         <ProductInCart item={item} />
       ))}
 
@@ -149,7 +155,7 @@ export default function Cart() {
           }}
         >
           <Typography sx={{ fontSize: '20px', fontWeight: '700' }}>
-            6.500.000đ
+            ...đ
           </Typography>
         </Box>
         <Box

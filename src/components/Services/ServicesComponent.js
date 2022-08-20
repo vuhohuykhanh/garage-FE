@@ -48,16 +48,17 @@ const ServicesComponent = () => {
       <Divider />
       <Box sx={{ flexGrow: 1, mb: 12, mt: 6 }}>
         <Grid container spacing={6}>
-          {services?.map((product) => (
+          {services?.map((service) => (
             <Grid
               item
               xs={6}
               md={3}
               onClick={() =>
-                navigate(`/services/detail/?${product?.serviceId}`)
+                navigate(`/services/detail/?${service?.serviceId}`)
               }
+              key={service.serviceId}
             >
-              {ProductItem(product)}
+              {ProductItem(service)}
             </Grid>
           ))}
         </Grid>

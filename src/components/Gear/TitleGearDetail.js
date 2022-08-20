@@ -1,6 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
+import AppToast from '../../myTool/AppToast';
+
 export default function TitleGearDetail({ product }) {
+  const [openToast, setOpenToast] = useState(false);
+
+  console.log(product);
+
+  const handleOrder = () => {
+    const productDetail = {
+      productId: product?.productId,
+      img: product?.image,
+      name: product?.name,
+      price: product?.price,
+      quantity: 1,
+    };
+
+    const listProduct = [];
+    if (productDetail) {
+      listProduct.push(productDetail);
+      console.log(listProduct);
+      localStorage.setItem('items', JSON.stringify(listProduct));
+      setOpenToast(true);
+    }
+  };
+
   return (
     <Box
       width="80%"
@@ -128,6 +152,7 @@ export default function TitleGearDetail({ product }) {
               <Button
                 variant="contained"
                 sx={{ width: '200px', background: '#0486FF' }}
+                onClick={handleOrder}
               >
                 Thêm vào giỏ hàng
               </Button>
@@ -135,6 +160,14 @@ export default function TitleGearDetail({ product }) {
           </Box>
         </Box>
       </Box>
+      <AppToast
+        content={'Thêm sản phẩm vào giỏ hàng thành công'}
+        type={0}
+        isOpen={openToast}
+        callback={() => {
+          setOpenToast(false);
+        }}
+      />
     </Box>
   );
 }

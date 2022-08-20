@@ -1,4 +1,5 @@
-const BASE_URL = 'http://192.168.1.7:5000';
+//const BASE_URL = 'http://192.168.1.7:5000';
+const BASE_URL = 'http://localhost:5000';
 
 //account
 export const API_GET_INFO_USER = `${BASE_URL}/api/user/get-user-info`;
