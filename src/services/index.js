@@ -31,7 +31,6 @@ import axios from 'axios';
 
 export const getUserInfoV2 = async () => {
   const token = localStorage.getItem('token');
-
   try {
     const response = await axios.get(API_GET_INFO_USER, {
       headers: { authorization: `Bearer ${token}` },

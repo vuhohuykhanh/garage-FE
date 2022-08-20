@@ -41,6 +41,7 @@ function Login() {
     if (res?.status === 200) {
       localStorage.setItem('token', res?.data?.accessToken);
       navigate('/');
+      window.location.reload();
     }
   }
 
@@ -61,6 +62,7 @@ function Login() {
   // const handleMouseDownPassword = (event) => {
   //     event.preventDefault();
   // };
+
   return (
     <div>
       {/* <Banner /> */}

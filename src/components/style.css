@@ -8,6 +8,10 @@
 	cursor: pointer;
 }
 
+.header_menuUser{
+	position: relative;
+}
+
 /* PRODUCT */
 .productCard{
 	border: 1px solid #aaa;
