@@ -9,7 +9,13 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-export default function ProductInCart({ item, setItems, items }) {
+export default function ProductInCart({
+  item,
+  setItems,
+  items,
+  setChange,
+  change,
+}) {
   const [quantity, setQuantity] = useState(item?.quantity);
 
   const handleIncrease = () => {
@@ -17,6 +23,7 @@ export default function ProductInCart({ item, setItems, items }) {
   };
 
   useEffect(() => {
+    setChange(!change);
     if (quantity > item?.stock) {
       setQuantity(item?.stock);
     } else {
@@ -28,12 +35,15 @@ export default function ProductInCart({ item, setItems, items }) {
       );
       const tempItem = { ...newItems[0], quantity: quantity };
       const allItemUpdate = [...itemsIncart, tempItem];
+      setItems(allItemUpdate);
       localStorage.setItem("items", JSON.stringify(allItemUpdate));
     }
   }, [quantity]);
 
   const handleDecrease = () => {
-    setQuantity(quantity - 1);
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
   };
 
   const handleDeleteItem = () => {
