@@ -113,6 +113,7 @@ function Infor() {
   };
 
   useEffect(() => {
+    checkLogin();
     getUserInfo();
   }, []);
   //HANDLE AVARTAR
@@ -184,14 +185,6 @@ function Infor() {
                     onChange={(e) => setPhone(e.target.value)}
                   />
                 </Grid>
-                {/* <Grid item={true} md={6}>
-                  <TextField
-                    label="Giới tính"
-                    color="primary"
-                    fullWidth={true}
-                    value={userInfo.gender === 1 ? "Nam" : "Nữ"}
-                  />
-                </Grid> */}
               </Grid>
               <Grid item={true} md={12}>
                 <TextField

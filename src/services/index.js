@@ -28,8 +28,51 @@ import {
   API_CREATE_SERVICE_TYPE,
   API_CREATE_CART_MAIN,
   API_UPDATE_PASSWORD,
+  API_GET_CART_BY_ID,
+  API_CREATE_DESCRIPTION_BY_ID,
+  API_CONFIRM_DESCRIPTION_BY_ID,
+  API_DELETE_DESCRIPTION_BY_ID,
 } from "./configs";
 import axios from "axios";
+
+export const deleteCartByIdAPI = async (id) => {
+  try {
+    const response = await axios.delete(
+      `${API_DELETE_DESCRIPTION_BY_ID}?id=${id}`
+    );
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+export const confirmCartByIdAPI = async (id) => {
+  try {
+    const response = await axios.patch(
+      `${API_CONFIRM_DESCRIPTION_BY_ID}?id=${id}`
+    );
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+export const getCartByIdAPI = async (id) => {
+  try {
+    const response = await axios.get(`${API_GET_CART_BY_ID}?id=${id}`);
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+export const getCartDescriptionAPI = async (id) => {
+  try {
+    const response = await axios.get(
+      `${API_CREATE_DESCRIPTION_BY_ID}?id=${id}`
+    );
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
 
 export const getUserInfoV2 = async () => {
   const token = localStorage.getItem("token");
@@ -193,7 +236,6 @@ export const updateInfoAPI = async (body) => {
     return error?.response?.data || error;
   }
 };
-
 
 // const userInfov2 = new UserInfov2();
 // export default userInfov2;
