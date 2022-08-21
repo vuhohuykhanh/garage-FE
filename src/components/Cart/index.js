@@ -5,39 +5,20 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createCartAPI } from "../../services/index";
 
-const mockData = [
-  {
-    imageProduct: require("../../assets/images/bg1.png"),
-    nameProduct: "Bọc ghế da xe ô tô Fortuner - BGD002",
-    quantity: 10,
-    price: 600000,
-  },
-  {
-    imageProduct: require("../../assets/images/bg1.png"),
-    nameProduct: "Bọc ghế da xe ô tô Fortuner - BGD002",
-    quantity: 7,
-    price: 400000,
-  },
-  {
-    imageProduct: require("../../assets/images/bg1.png"),
-    nameProduct: "Bọc ghế da xe ô tô Fortuner - BGD002",
-    quantity: 5,
-    price: 300000,
-  },
-];
 export default function Cart() {
   const storageItems = JSON.parse(localStorage.getItem("items"));
   const [items, setItems] = useState(storageItems || []);
   const navigate = useNavigate();
+  const [totalPrice, setTotalPrice] = useState();
 
-  const totalPrice = items?.reduce((a, b) => a + b?.price * b?.quantity, 0);
+useEffect(() => {
+	const totalPrice = items?.reduce((a, b) => a + b?.price * b?.quantity, 0);
+	setTotalPrice(totalPrice)
+}, [])
 
   const checkLogin = () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      // setContentToast("bạn cần login để sử dụng tính năng này");
-      // setSeverity("error");
-      // setOpenToast(true);
       navigate("/login");
     }
   };
@@ -65,7 +46,7 @@ export default function Cart() {
       totalPrice: totalPrice,
       products: products,
       services: services,
-      cartId: "105",
+      cartId: "106",
     };
     console.log(body);
 
