@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
-import ImageGarage from "../../assets/images/garage_1.png";
-import ImageGarage_1 from "../../assets/images/697054.jpg";
-import ImageGarage_2 from "../../assets/images/114920.jpg";
+import { useCallback, useEffect, useState } from 'react';
+import ImageGarage from '../../assets/images/garage_1.png';
+import ImageGarage_1 from '../../assets/images/697054.jpg';
+import ImageGarage_2 from '../../assets/images/114920.jpg';
 
-import "./SlideShow.css";
-import { ExampleSlide } from "./utils";
-import SlideContent from "./SlideContent";
+import './SlideShow.css';
+import { ExampleSlide } from './utils';
+import SlideContent from './SlideContent';
 
 const SlideShow = () => {
   const [slideIndex, setSlideIndex] = useState(1);
@@ -16,10 +16,9 @@ const SlideShow = () => {
   });
   const showSlides = useCallback(
     (n) => {
-      
       let i;
-      let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("dot");
+      let slides = document.getElementsByClassName('mySlides');
+      let dots = document.getElementsByClassName('dot');
       if (n > slides.length) {
         setSlideIndex(1);
       }
@@ -27,13 +26,13 @@ const SlideShow = () => {
         setSlideIndex(slides.length);
       }
       for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+        slides[i].style.display = 'none';
       }
       for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
+        dots[i].className = dots[i].className.replace(' active', '');
       }
-      slides[slideIndex - 1].style.display = "block";
-      dots[slideIndex - 1].className += " active";
+      slides[slideIndex - 1].style.display = 'block';
+      dots[slideIndex - 1].className += ' active';
     },
     [slideIndex]
   );
@@ -43,9 +42,7 @@ const SlideShow = () => {
     setSlideIndex(slide);
   };
 
-
   const currentSlide = (n) => {
-   
     const slide = n;
     setSlideIndex(slide);
   };
@@ -56,7 +53,9 @@ const SlideShow = () => {
   return (
     <>
       <div className="slideshow-container">
-        {slideShow.map((value) => SlideContent(value.img, value.content))}
+        {slideShow.map((value) =>
+          SlideContent(value.id, value.img, value.content)
+        )}
 
         {slideIndex !== 1 && (
           <button className="prev" onClick={() => plusSlides(-1)}>

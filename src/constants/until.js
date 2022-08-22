@@ -1,11 +1,11 @@
 export default function formatMoneyWithDot(str) {
-  str = `${str}`;
-  const temp = str
-    .split("")
-    .reverse()
-    .reduce((prev, next, index) => {
-      return (index % 3 ? next : next + ".") + prev;
-    });
+    str = `${str}`;
+    const temp = str
+        .split('')
+        .reverse()
+        .reduce((prev, next, index) => {
+            return (index % 3 ? next : next + '.') + prev;
+        });
 
-  return temp + "đ";
+    return temp + 'đ';
 }

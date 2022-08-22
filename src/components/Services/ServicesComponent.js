@@ -20,7 +20,6 @@ const TitleCustom = styled(Typography)(({ theme }) => ({
 }));
 const ServicesComponent = () => {
   const { search } = useLocation();
-  const products = ExampleProducts();
 
   const [services, setServices] = React.useState([]);
   const navigate = useNavigate();
@@ -29,7 +28,10 @@ const ServicesComponent = () => {
   async function getAServiceByType(id) {
     const res = await getAServiceByTypeAPI(id);
     if (res?.status === 200) {
+      console.log(res?.data);
       setServices(res?.data);
+    } else {
+      console.log(res);
     }
   }
 

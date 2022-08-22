@@ -1,13 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Typography,
-  Input,
-  Avatar,
-  Button,
-  TextField,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, Button, TextField } from '@mui/material';
 
 export default function ProductInCart({
   item,
@@ -36,12 +28,12 @@ export default function ProductInCart({
       const tempItem = { ...newItems[0], quantity: quantity };
       const allItemUpdate = [...itemsIncart, tempItem];
       setItems(allItemUpdate);
-      localStorage.setItem("items", JSON.stringify(allItemUpdate));
+    //  localStorage.setItem('items', JSON.stringify(allItemUpdate));
     }
   }, [quantity]);
 
   const handleDecrease = () => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   };
@@ -50,55 +42,57 @@ export default function ProductInCart({
     const newItems = items?.filter(
       (value) => value.productId !== item?.productId
     );
-    localStorage.setItem("items", JSON.stringify(newItems));
+    localStorage.setItem('items', JSON.stringify(newItems));
     setItems(newItems);
+    setChange(!change);
   };
 
   return (
     <Box
       width="80.4%"
       m="auto"
-      sx={{ display: "flex", justifyContent: "space-evenly" }}
+      sx={{ display: 'flex', justifyContent: 'space-evenly' }}
     >
       <Box
         width="20%"
         sx={{
-          border: "1px solid #DEDEDE",
-          height: "180px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          border: '1px solid #DEDEDE',
+          height: '180px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <img
           width="150px"
           height="130px"
-          src={require("../../assets/images/bg1.png")}
+          src={require('../../assets/images/bg1.png')}
+          alt="detailImage"
         />
       </Box>
       <Box
         width="40%"
         sx={{
-          border: "1px solid #DEDEDE",
-          height: "180px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          border: '1px solid #DEDEDE',
+          height: '180px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <Typography sx={{ fontSize: "20px", fontWeight: "700" }}>
+        <Typography sx={{ fontSize: '20px', fontWeight: '700' }}>
           {item?.name}
         </Typography>
       </Box>
-      {item?.type === "service" ? (
+      {item?.type === 'service' ? (
         <Box
           width="15%"
           sx={{
-            border: "1px solid #DEDEDE",
-            height: "180px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            border: '1px solid #DEDEDE',
+            height: '180px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           {quantity}
@@ -107,15 +101,16 @@ export default function ProductInCart({
         <Box
           width="15%"
           sx={{
-            border: "1px solid #DEDEDE",
-            height: "180px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            border: '1px solid #DEDEDE',
+            height: '180px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <Button onClick={handleDecrease}>-</Button>
           <TextField
+            disabled="true"
             color="secondary"
             value={quantity}
             onChange={(e) => {
@@ -133,11 +128,11 @@ export default function ProductInCart({
       <Box
         width="15%"
         sx={{
-          border: "1px solid #DEDEDE",
-          height: "180px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          border: '1px solid #DEDEDE',
+          height: '180px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         {item?.price}
@@ -145,18 +140,19 @@ export default function ProductInCart({
       <Box
         width="10%"
         sx={{
-          border: "1px solid #DEDEDE",
-          height: "180px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          border: '1px solid #DEDEDE',
+          height: '180px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Button onClick={handleDeleteItem}>
           <img
             width="35px"
             height="35px"
-            src={require("../../assets/images/deleteIcon.png")}
+            src={require('../../assets/images/deleteIcon.png')}
+            alt="detailImage"
           />
         </Button>
       </Box>

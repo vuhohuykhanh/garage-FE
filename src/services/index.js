@@ -32,8 +32,8 @@ import {
   API_CREATE_DESCRIPTION_BY_ID,
   API_CONFIRM_DESCRIPTION_BY_ID,
   API_DELETE_DESCRIPTION_BY_ID,
-} from "./configs";
-import axios from "axios";
+} from './configs';
+import axios from 'axios';
 
 export const deleteCartByIdAPI = async (id) => {
   try {
@@ -45,11 +45,9 @@ export const deleteCartByIdAPI = async (id) => {
     return error?.response?.data || error;
   }
 };
-export const confirmCartByIdAPI = async (id) => {
+export const confirmCartByIdAPI = async (body) => {
   try {
-    const response = await axios.patch(
-      `${API_CONFIRM_DESCRIPTION_BY_ID}?id=${id}`
-    );
+    const response = await axios.patch(API_CONFIRM_DESCRIPTION_BY_ID, body);
     return response;
   } catch (error) {
     return error?.response?.data || error;
@@ -75,11 +73,20 @@ export const getCartDescriptionAPI = async (id) => {
 };
 
 export const getUserInfoV2 = async () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   try {
     const response = await axios.get(API_GET_INFO_USER, {
       headers: { authorization: `Bearer ${token}` },
     });
+    return response;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+};
+
+export const signUpAPI = async (body) => {
+  try {
+    const response = await axios.post(API_SIGNUP, body);
     return response;
   } catch (error) {
     return error?.response?.data || error;

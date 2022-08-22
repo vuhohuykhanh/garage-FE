@@ -9,7 +9,7 @@ const AboutContent = () => {
     <Box sx={{ flexGrow: 1, mb: 12, mt: 10 }}>
       <Grid container spacing={6}>
         {abouts.map((about) => (
-          <Grid item xs={6} md={3}>
+          <Grid item xs={6} md={3} key={about.id}>
             <AboutItem title={about.title} content={about.content} />
           </Grid>
         ))}

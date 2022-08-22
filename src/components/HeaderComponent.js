@@ -1,42 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { Box, Typography, Input, Avatar, Button, Popper } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import React, { useEffect, useState } from 'react';
+import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
-import { useNavigate } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import { getAllServiceTypeAPI, getAllProductTypeAPI } from "../services/index";
+import { useNavigate } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import { getAllServiceTypeAPI, getAllProductTypeAPI } from '../services/index';
 // import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const arrLogo = [
   {
-    image: require("../assets/images/honda1.png"),
+    image: require('../assets/images/honda1.png'),
   },
   {
-    image: require("../assets/images/honda2.png"),
+    image: require('../assets/images/honda2.png'),
   },
   {
-    image: require("../assets/images/honda3.png"),
+    image: require('../assets/images/honda3.png'),
   },
   {
-    image: require("../assets/images/honda4.png"),
+    image: require('../assets/images/honda4.png'),
   },
   {
-    image: require("../assets/images/honda5.png"),
+    image: require('../assets/images/honda5.png'),
   },
   {
-    image: require("../assets/images/honda6.png"),
+    image: require('../assets/images/honda6.png'),
   },
   {
-    image: require("../assets/images/honda9.png"),
+    image: require('../assets/images/honda9.png'),
   },
   {
-    image: require("../assets/images/honda10.png"),
+    image: require('../assets/images/honda10.png'),
   },
   {
-    image: require("../assets/images/honda11.png"),
+    image: require('../assets/images/honda11.png'),
   },
 ];
 export default function HeaderComponent({ userInfo, setUserInfo }) {
@@ -79,31 +79,41 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
     setAnchorElProfile(null);
   };
 
+  const handleInfo = () => {
+    navigate('/infor');
+    setAnchorElProfile(null);
+  };
+
+  const handleCartDetail = () => {
+    navigate('/cartDetail');
+    setAnchorElProfile(null);
+  };
+
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     setAnchorElProfile(false);
     setUserInfo(null);
-    navigate("/login");
+    navigate('/login');
   };
 
   const isOpen = Boolean(isAnchorEl);
   const open = Boolean(anchorEl);
 
-  const id = open ? "simple-popper" : undefined;
-  const id1 = open ? "simple-popper" : undefined;
+  const id = open ? 'simple-popper' : undefined;
+  const id1 = open ? 'simple-popper' : undefined;
 
   return (
     <Box>
       <BoxContainer>
         <BoxContentHeader>
-          <Button onClick={() => navigate("/")}>
+          <Button onClick={() => navigate('/')}>
             <TypographyeText>Trang chủ</TypographyeText>
           </Button>
           <Box
             style={{
-              borderRight: "2px solid #A0A0A0",
-              width: "1px",
-              color: "#FFFFFF",
+              borderRight: '2px solid #A0A0A0',
+              width: '1px',
+              color: '#FFFFFF',
             }}
           >
             1
@@ -114,9 +124,9 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
           </Button>
           <Box
             style={{
-              borderRight: "2px solid #A0A0A0",
-              width: "1px",
-              color: "#FFFFFF",
+              borderRight: '2px solid #A0A0A0',
+              width: '1px',
+              color: '#FFFFFF',
             }}
           >
             1
@@ -126,28 +136,28 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
             {/* <ArrowDropDownIcon color="action" /> */}
           </Button>
         </BoxContentHeader>
-        <Box className="headerLogo" onClick={() => navigate("/")}>
-          <img src={require("../assets/images/Logo.png")} alt="Logo" />
+        <Box className="headerLogo" onClick={() => navigate('/')}>
+          <img src={require('../assets/images/Logo.png')} alt="Logo" />
         </Box>
         <BoxContentHeader>
-          <Button onClick={() => navigate("/cart")}>
+          <Button onClick={() => navigate('/cart')}>
             <TypographyeText>GIỎ HÀNG</TypographyeText>
           </Button>
           <Box
             style={{
-              borderRight: "2px solid #A0A0A0",
-              width: "1px",
-              color: "#FFFFFF",
+              borderRight: '2px solid #A0A0A0',
+              width: '1px',
+              color: '#FFFFFF',
             }}
           >
             1
           </Box>
-          {userInfo?.name ? (
+          {userInfo?.idCardNumber ? (
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
             >
               <TypographyeText>Xin chào : </TypographyeText>
@@ -164,17 +174,17 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
                   <AccountCircle />
                 </IconButton>
                 <Menu
-                  sx={{ ml: "-150px", mt: "50px" }}
+                  sx={{ ml: '-150px', mt: '50px' }}
                   id="menu-appbar"
                   anchorEl={anchorElProfile}
                   anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
+                    vertical: 'top',
+                    horizontal: 'right',
                   }}
                   keepMounted
                   transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
+                    vertical: 'top',
+                    horizontal: 'right',
                   }}
                   open={Boolean(anchorElProfile)}
                   onClose={handleClose}
@@ -182,13 +192,13 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
                 >
                   <MenuItem
                     className="header_menuUser-item"
-                    onClick={handleClose}
+                    onClick={handleInfo}
                   >
                     Profile
                   </MenuItem>
                   <MenuItem
                     className="header_menuUser-item"
-                    onClick={() => navigate("/cartDetail")}
+                    onClick={handleCartDetail}
                   >
                     Quản lý đơn hàng
                   </MenuItem>
@@ -202,13 +212,13 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
               </div>
             </Box>
           ) : (
-            <Button onClick={() => navigate("/login")}>
+            <Button onClick={() => navigate('/login')}>
               <TypographyeText>ĐĂNG NHẬP</TypographyeText>
             </Button>
           )}
 
-          {!userInfo?.name && (
-            <Button>
+          {!userInfo?.idCardNumber && (
+            <Button onClick={() => navigate('/register')}>
               <TypographyeText>ĐĂNG KÝ</TypographyeText>
             </Button>
           )}
@@ -218,25 +228,29 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
             sx={{
               border: 1,
               p: 1,
-              bgcolor: "background.paper",
-              minWidth: "470px",
-              maxWidth: "670px",
-              minHeight: "120px",
+              bgcolor: 'background.paper',
+              minWidth: '470px',
+              maxWidth: '670px',
+              minHeight: '120px',
               // maxHeight: "200px",
-              boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.6)",
+              boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
             }}
           >
             <TypographyeText
-              sx={{ margin: "30px", fontWeight: "bold", fontSize: "24px" }}
+              sx={{
+                margin: '30px',
+                fontWeight: 'bold',
+                fontSize: '24px',
+              }}
             >
               DỊCH VỤ
             </TypographyeText>
             <Box
               mb={3}
               sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "space-evenly",
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-evenly',
               }}
             >
               {services?.map((e) => (
@@ -247,7 +261,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
                     navigate(`/services/?${e?.serviceTypeId}`);
                     setAnchorEl(null);
                   }}
-                  sx={{ marginBottom: "15px", width: "40%" }}
+                  sx={{ marginBottom: '15px', width: '40%' }}
                 >
                   <TypographySelect>{e?.serviceTypeName}</TypographySelect>
                 </Box>
@@ -260,25 +274,29 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
             sx={{
               border: 1,
               p: 1,
-              bgcolor: "background.paper",
-              minWidth: "470px",
-              maxWidth: "670px",
-              minHeight: "120px",
+              bgcolor: 'background.paper',
+              minWidth: '470px',
+              maxWidth: '670px',
+              minHeight: '120px',
               // maxHeight: "200px",
-              boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.6)",
+              boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
             }}
           >
             <TypographyeText
-              sx={{ margin: "30px", fontWeight: "bold", fontSize: "24px" }}
+              sx={{
+                margin: '30px',
+                fontWeight: 'bold',
+                fontSize: '24px',
+              }}
             >
               SẢN PHẨM
             </TypographyeText>
             <Box
               mb={3}
               sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "space-evenly",
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-evenly',
               }}
             >
               {product?.map((e) => (
@@ -289,7 +307,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
                     navigate(`/gear/?${e?.productTypeId}`);
                     setIsAnchorEl(null);
                   }}
-                  sx={{ marginBottom: "15px", width: "40%" }}
+                  sx={{ marginBottom: '15px', width: '40%' }}
                 >
                   <TypographySelect>{e?.productTypeName}</TypographySelect>
                 </Box>
@@ -300,16 +318,16 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
       </BoxContainer>
       <Box
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          backgroundColor: " rgba(135, 193, 248, 0.5)",
-          width: "78%",
-          margin: "0 auto",
-          padding: "0 20px",
+          display: 'flex',
+          justifyContent: 'space-between',
+          backgroundColor: ' rgba(135, 193, 248, 0.5)',
+          width: '78%',
+          margin: '0 auto',
+          padding: '0 20px',
         }}
       >
         {arrLogo.map((item, index) => (
-          <img key={index} src={item?.image} />
+          <img key={index} src={item?.image} alt="detailImage" />
         ))}
       </Box>
     </Box>
@@ -317,30 +335,30 @@ export default function HeaderComponent({ userInfo, setUserInfo }) {
 }
 
 const BoxContainer = styled(Box)({
-  width: "80%",
-  height: "94px",
-  backgroundColor: "#FFFFFF",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  margin: "0 auto",
+  width: '80%',
+  height: '94px',
+  backgroundColor: '#FFFFFF',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  margin: '0 auto',
 });
 
 const BoxContentHeader = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  width: "450px",
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  width: '450px',
 });
 const TypographyeText = styled(Typography)({
-  fontSize: "18px",
-  fontWeight: "500",
-  color: "#000000",
+  fontSize: '18px',
+  fontWeight: '500',
+  color: '#000000',
 });
 
 const TypographySelect = styled(Typography)({
-  fontSize: "15px",
-  fontWeight: "400",
-  color: "#000000",
-  marginBottom: "15px",
+  fontSize: '15px',
+  fontWeight: '400',
+  color: '#000000',
+  marginBottom: '15px',
 });
