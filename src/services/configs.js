@@ -6,6 +6,7 @@ export const API_GET_INFO_USER = `${BASE_URL}/api/user/get-user-info`;
 export const API_UPDATE_INFO_USER = `${BASE_URL}/api/user/update`;
 export const API_SIGNIN = `${BASE_URL}/api/account/signin`;
 export const API_SIGNUP = `${BASE_URL}/api/account/signup`;
+export const API_FORGOT_PASSWORD = `${BASE_URL}/api/account/forgot-password`;
 
 export const API_UPDATE_PASSWORD = `${BASE_URL}/api/user/updatePassword`;
 
@@ -56,7 +57,11 @@ export const API_CREATE_SERVICE_TYPE = `${BASE_URL}/api/serviceType/create`;
 //cart
 
 export const API_CREATE_CART_MAIN = `${BASE_URL}/api/cart/create`;
+export const API_DELETE_CART_MAIN = `${BASE_URL}/api/cart/delete`;
 export const API_GET_CART_BY_ID = `${BASE_URL}/api/cart/get-cart-by-id`;
 export const API_CREATE_DESCRIPTION_BY_ID = `${BASE_URL}/api/cartDescription/get-cartdes-by-id`;
 export const API_DELETE_DESCRIPTION_BY_ID = `${BASE_URL}/api/cartDescription/delete`;
 export const API_CONFIRM_DESCRIPTION_BY_ID = `${BASE_URL}/api/cartDescription/confirm`;
+
+//email
+export const API_SEND_EMAIL = `${BASE_URL}/api/mail/sendMail`;

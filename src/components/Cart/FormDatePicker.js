@@ -6,104 +6,142 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDateTimePicker,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import TextField from '@mui/material/TextField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { sendEmailAPI } from '../../services/index';
+import AppToast from '../../myTool/AppToast';
+import { validateEmail } from '../../constants';
 
-export default function MaxWidthDialog({ open, setOpen }) {
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState('sm');
+export default function MaxWidthDialog({
+    open,
+    setOpen,
+    services,
+    setDidEmail,
+}) {
+    const [value, setValue] = React.useState(new Date());
+    const [email, setEmail] = React.useState('');
+    const [isError, setIsError] = React.useState(false);
+    const [openToast, setOpenToast] = React.useState(false);
+    const [contentToast, setContentToast] = React.useState('');
+    const [severity, setSeverity] = React.useState('');
 
-  const [selectedDate, handleDateChange] = React.useState(
-    new Date('2019-01-01T18:54')
-  );
+    const getDateTime = (string) => {
+        const date = `${string.getDate()}/${string.getMonth()}/${string.getFullYear()}`;
+        return date;
+    };
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+    const sendEmail = async (body) => {
+        const response = await sendEmailAPI(body);
+        if (response.status === 200) {
+            setOpenToast(true);
+            setContentToast('Hệ thống đã gởi email xác nhận đặt lịch');
+            setSeverity('success');
+            setOpen(false);
+            setDidEmail(true);
+        } else {
+            setOpenToast(true);
+            setContentToast('Gửi email thất bại');
+            setSeverity('error');
+            setDidEmail(false);
+            console.log(response);
+        }
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClose = () => {
+        setOpen(false);
+        setValue(new Date());
+        setEmail('');
+        setIsError(false);
+    };
 
-  const handleMaxWidthChange = (event) => {
-    setMaxWidth(
-      // @ts-expect-error autofill of arbitrary value is not handled.
-      event.target.value
-    );
-  };
+    const handleOK = async () => {
+        if (!email || !value) {
+            setIsError(true);
+        } else {
+            setIsError(false);
+            let d = new Date(value);
 
-  const handleFullWidthChange = (event) => {
-    setFullWidth(event.target.checked);
-  };
+            const body = {
+                email,
+                dateTime: getDateTime(d),
+                services,
+            };
 
-  return (
-    <React.Fragment>
-      <Dialog
-        fullWidth={fullWidth}
-        maxWidth={maxWidth}
-        open={open}
-        onClose={handleClose}
-      >
-        <DialogTitle>Chọn thời gian</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Hãy nhập Email và chọn thời gian bạn có thể đưa xe tới garage
-          </DialogContentText>
-          <Box
-            noValidate
-            component="form"
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              m: 'auto',
-              width: 'fit-content',
-            }}
-          >
-            <FormControl sx={{ mt: 2, minWidth: 120 }}>
-              <InputLabel htmlFor="max-width">maxWidth</InputLabel>
-              <Select
-                autoFocus
-                value={maxWidth}
-                onChange={handleMaxWidthChange}
-                label="maxWidth"
-                inputProps={{
-                  name: 'max-width',
-                  id: 'max-width',
+            await sendEmail(body);
+        }
+    };
+
+    return (
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Chọn thời gian</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Hãy nhập Email và chọn thời gian bạn có thể đưa xe tới
+                        garage
+                    </DialogContentText>
+                    <Box
+                        noValidate
+                        component="form"
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            m: '40px 20px',
+                        }}
+                    >
+                        <DatePicker
+                            label="Basic example"
+                            value={value}
+                            onChange={(newValue) => {
+                                setValue(newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                        <TextField
+                            sx={{ mt: '20px' }}
+                            label="Email"
+                            color="primary"
+                            fullWidth={true}
+                            value={email}
+                            onChange={(e) => {
+                                setEmail(e?.target?.value);
+                            }}
+                            error={email && !validateEmail(email)}
+                            helperText={
+                                email &&
+                                !validateEmail(email) &&
+                                'Vui lòng nhập đúng định dạng Email'
+                            }
+                        />
+                    </Box>
+                </DialogContent>
+                <p
+                    style={{
+                        margin: '10px',
+                        color: 'red',
+                        fontWeight: 'Bold',
+                        justifyContent: 'flex-end',
+                        display: isError ? 'flex' : 'none',
+                    }}
+                >
+                    Vui lòng nhập đầy đủ thông tin
+                </p>
+                <DialogActions>
+                    <Button onClick={handleClose}>Close</Button>
+                    <Button onClick={handleOK}>Accept</Button>
+                </DialogActions>
+            </Dialog>
+            <AppToast
+                content={contentToast}
+                type={0}
+                isOpen={openToast}
+                severity={severity}
+                callback={() => {
+                    setOpenToast(false);
                 }}
-              >
-                <MenuItem value={false}>false</MenuItem>
-                <MenuItem value="xs">xs</MenuItem>
-                <MenuItem value="sm">sm</MenuItem>
-                <MenuItem value="md">md</MenuItem>
-                <MenuItem value="lg">lg</MenuItem>
-                <MenuItem value="xl">xl</MenuItem>
-              </Select>
-            </FormControl>
-            {/*<FormControl sx={{ mt: 2, minWidth: 120 }}>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDateTimePicker
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  label="Keyboard with error handler"
-                  onError={console.log}
-                  minDate={new Date('2018-01-01T00:00')}
-                  format="yyyy/MM/dd hh:mm a"
-                />
-              </MuiPickersUtilsProvider>
-            </FormControl>*/}
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
-  );
+            />
+        </LocalizationProvider>
+    );
 }
