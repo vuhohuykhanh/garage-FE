@@ -7,9 +7,8 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import {  createTheme, ThemeProvider } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-//import { Copyright } from './component/Admin/AdminFrame';
 import AdminFrame from "./components/Admin/AdminFrame";
 import { getUserInfoV2 } from "./services/index";
 
@@ -47,6 +46,7 @@ export function CustomerApp() {
 }
 
 export function AdminApp() {
+	console.log('alo alo')
   const mdTheme = createTheme();
   return (
     <ThemeProvider theme={mdTheme}>
