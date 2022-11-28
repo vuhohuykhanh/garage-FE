@@ -24,18 +24,18 @@ const ServicesComponent = () => {
     const navigate = useNavigate();
     const id = search.split('?')[1];
 
-    async function getAServiceByType(id: any) {
-        const res = await getAServiceByTypeAPI(id);
-        if (res?.status === 200) {
-            setServices(res?.data);
-        } else {
-            console.log(res);
-        }
-    }
+    //async function getAServiceByType(id: any) {
+    //    const res = await getAServiceByTypeAPI(id);
+    //    if (res?.status === 200) {
+    //        setServices(res?.data);
+    //    } else {
+    //        console.log(res);
+    //    }
+    //}
 
-    useEffect(() => {
-        getAServiceByType(id);
-    }, [id]);
+    //useEffect(() => {
+    //    getAServiceByType(id);
+    //}, [id]);
     useEffect(() => {}, []);
     return (
         <>

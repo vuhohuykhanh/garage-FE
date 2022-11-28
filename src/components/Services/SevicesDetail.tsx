@@ -12,16 +12,16 @@ export default function SevicesDetail() {
     const navigate = useNavigate();
     const id = search.split('?')[1];
 
-    async function getAServiceByID(id: any) {
-        const res = await getAServiceByIDAPI(id);
-        if (res?.status === 200) {
-            setServices(res?.data);
-        }
-    }
+    //async function getAServiceByID(id: any) {
+    //    const res = await getAServiceByIDAPI(id);
+    //    if (res?.status === 200) {
+    //        setServices(res?.data);
+    //    }
+    //}
 
-    useEffect(() => {
-        getAServiceByID(id);
-    }, [id]);
+    //useEffect(() => {
+    //    getAServiceByID(id);
+    //}, [id]);
 
     return (
         <Box>

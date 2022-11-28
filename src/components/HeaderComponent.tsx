@@ -7,7 +7,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import { getAllServiceTypeAPI, getAllProductTypeAPI } from '../services/index';
+import { getAllServiceTypeAPI, getAllAccessoryTypeAPI } from '../services/index';
 // import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const arrLogo = [
@@ -53,7 +53,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }: any) {
         if (res?.status === 200) {
             setServices(res?.data);
         }
-        const res1 = await getAllProductTypeAPI();
+        const res1 = await getAllAccessoryTypeAPI();
         if (res1?.status === 200) {
             setProduct(res1?.data);
         }
@@ -258,18 +258,18 @@ export default function HeaderComponent({ userInfo, setUserInfo }: any) {
                         >
                             {services?.map((e: any) => (
                                 <Box
-                                    key={e?.serviceTypeId}
+                                    key={e?.id}
                                     className="header-list"
                                     onClick={() => {
                                         navigate(
-                                            `/services/?${e?.serviceTypeId}`
+                                            `/services/?${e?.id}`
                                         );
                                         setAnchorEl(null);
                                     }}
                                     sx={{ marginBottom: '15px', width: '40%' }}
                                 >
                                     <TypographySelect>
-                                        {e?.serviceTypeName}
+                                        {e?.name}
                                     </TypographySelect>
                                 </Box>
                             ))}
@@ -308,16 +308,16 @@ export default function HeaderComponent({ userInfo, setUserInfo }: any) {
                         >
                             {product?.map((e: any) => (
                                 <Box
-                                    key={e?.productTypeId}
+                                    key={e?.id}
                                     className="header-list"
                                     onClick={() => {
-                                        navigate(`/gear/?${e?.productTypeId}`);
+                                        navigate(`/gear/?${e?.id}`);
                                         setIsAnchorEl(null);
                                     }}
                                     sx={{ marginBottom: '15px', width: '40%' }}
                                 >
                                     <TypographySelect>
-                                        {e?.productTypeName}
+                                        {e?.name}
                                     </TypographySelect>
                                 </Box>
                             ))}

@@ -31,8 +31,8 @@ import AppToast from '../../../myTool/AppToast';
 
 import {
   getAllProductAPI,
-  updateProductByIDAPI,
-  deleteProductByIDAPI,
+  updateProductByIdAPI,
+  deleteProductByIdAPI,
 } from '../../../services/index';
 
 //import FormDialog from "../../component/Admin/FormCreditClassInfor";
@@ -165,14 +165,14 @@ export default function ProductInfor() {
   }
 
   async function updateProduct(id: any) {
-    const res = await updateProductByIDAPI(id);
+    const res = await updateProductByIdAPI(id);
     if (res?.data === 200) {
       console.log(res?.data);
     }
   }
 
   async function deleteProductById(id: any) {
-    const res = await deleteProductByIDAPI(id);
+    const res = await deleteProductByIdAPI(id);
     if (res?.status === 200) {
       setOpenToast(true);
       loadProduct();

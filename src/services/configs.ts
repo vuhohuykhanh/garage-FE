@@ -1,67 +1,109 @@
-//const BASE_URL = 'http://192.168.1.11:5000';
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'http://localhost:5000/api';
+
+//accessory-type
+export const GET_ALL_ACCESSORY_TYPE = `${BASE_URL}/accessory-type/get-all`;
+export const CREATE_ACCESSORY_TYPE  = `${BASE_URL}/accessory-type/create`;
 
 //account
-export const API_GET_INFO_USER = `${BASE_URL}/api/user/get-user-info`;
-export const API_UPDATE_INFO_USER = `${BASE_URL}/api/user/update`;
-export const API_SIGNIN = `${BASE_URL}/api/account/sign-in`;
-export const API_SIGNUP = `${BASE_URL}/api/account/signup`;
-export const API_FORGOT_PASSWORD = `${BASE_URL}/api/account/forgot-password`;
+export const SIGNIN = `${BASE_URL}/account/sign-in`;
+export const SIGNUP = `${BASE_URL}/account/sign-up`;
+export const GET_ALL_ACCOUNT = `${BASE_URL}/account/get-all`;
+export const FORGOT_PASSWORD = `${BASE_URL}/account/forgot-password`;
 
-export const API_UPDATE_PASSWORD = `${BASE_URL}/api/user/updatePassword`;
 
-// description
+//bill
 
-export const API_GET_ALL_DESCRIPTION = `${BASE_URL}/api/description/get-all`;
-export const API_CREATE_DESCRIPTION = `${BASE_URL}/api/description/create`;
-
-// manufacturer
-
-export const API_GET_ALL_MANUFACTURER = `${BASE_URL}/api/manufacturer/get-all`;
-export const API_CREATE_MANUFACTURER = `${BASE_URL}/api/manufacturer/create`;
-
-// product
-
-export const API_CREATE_PRODUCT = `${BASE_URL}/api/product/create`;
-export const API_GET_ALL_PRODUCT = `${BASE_URL}/api/product/get-all`;
-export const API_GET_PRODUCT_BY_ID_MANUFACTURER = `${BASE_URL}/api/product/get-product-by-manufacturer`;
-export const API_GET_PRODUCT_BY_TYPE = `${BASE_URL}/api/product/get-product-by-type`;
-export const API_GET_PRODUCT_BY_ID = `${BASE_URL}/api/product/get-product-by-id`;
-export const API_UPDATE_PRODUCT_BY_ID = `${BASE_URL}/api/product/update`;
-export const API_DELETE_PRODUCT_BY_ID = `${BASE_URL}/api/product/delete`;
-
-// product type
-
-export const API_GET_ALL_PRODUCT_TYPE = `${BASE_URL}/api/product-type/get-all`;
-export const API_CREATE_PRODUCT_TYPE = `${BASE_URL}/api/productType/create`;
-
-// role
-
-export const API_GET_ALL_ROLE = `${BASE_URL}/api/role/get-all`;
-export const API_CREATE_ROLE = `${BASE_URL}/api/role/create`;
-
-// service
-
-export const API_CREATE_SERVICE = `${BASE_URL}/api/service/create`;
-export const API_GET_ALL_SERVICE = `${BASE_URL}/api/service/get-all`;
-export const API_GET_SERVICE_BY_TYPE = `${BASE_URL}/api/service/get-service-by-type`;
-export const API_GET_SERVICE_BY_ID = `${BASE_URL}/api/service/get-service-by-id`;
-export const API_UPDATE_SERVICE_BY_ID = `${BASE_URL}/api/service/update`;
-export const API_DELETE_SERVICE_BY_ID = `${BASE_URL}/api/service/delete`;
-
-// service type
-
-export const API_GET_ALL_SERVICE_TYPE = `${BASE_URL}/api/serviceType/get-all`;
-export const API_CREATE_SERVICE_TYPE = `${BASE_URL}/api/serviceType/create`;
 
 //cart
+export const GET_CART_BY_USER_ID = `${BASE_URL}/cart/get-cart-by-user-id`;
+export const UPDATE_CART_STATUS = `${BASE_URL}/cart/update-status`;
+export const UPDATE_CART = `${BASE_URL}/cart/update`;
+export const DELETE_CART_MAIN = `${BASE_URL}/cart/delete`;
 
-export const API_CREATE_CART_MAIN = `${BASE_URL}/api/cart/create`;
-export const API_DELETE_CART_MAIN = `${BASE_URL}/api/cart/delete`;
-export const API_GET_CART_BY_ID = `${BASE_URL}/api/cart/get-cart-by-id`;
-export const API_CREATE_DESCRIPTION_BY_ID = `${BASE_URL}/api/cartDescription/get-cartdes-by-id`;
-export const API_DELETE_DESCRIPTION_BY_ID = `${BASE_URL}/api/cartDescription/delete`;
-export const API_CONFIRM_DESCRIPTION_BY_ID = `${BASE_URL}/api/cartDescription/confirm`;
+
+//cart-description
+export const GET_CART_DESCRIPTION_BY_CART_ID = `${BASE_URL}/cart-description/get-cart-description-by-cart-id`;
+export const ADD_CART_DESCRIPTION = `${BASE_URL}/cart-description/add`;
+export const DELETE_CART_DESCRIPTION_BY_ID = `${BASE_URL}/cart-description/delete`;
+export const CONFIRM_CART_DESCRIPTION_BY_ID = `${BASE_URL}/cart-description/confirm`;
+export const CREATE_CART_DESCRIPTION = `${BASE_URL}/cart-description/create`;
+
+
+//cart-type
+export const GET_ALL_CART_TYPE = `${BASE_URL}/cart-type/get-all`;
+export const CREATE_CART_TYPE  = `${BASE_URL}/cart-type/create`;
+
+
+//comment
+export const GET_ALL_COMMENT = `${BASE_URL}/comment/get-all`;
+export const CREATE_COMMENT  = `${BASE_URL}/comment/create`;
+
+
+//descriptionType
+export const GET_ALL_DESCRIPTION_TYPE = `${BASE_URL}/description-type/get-all`;
+export const CREATE_DESCRIPTION_TYPE  = `${BASE_URL}/description-type/create`;
+
 
 //email
-export const API_SEND_EMAIL = `${BASE_URL}/api/mail/sendMail`;
+export const SEND_EMAIL = `${BASE_URL}/mail/sendMail`;
+
+
+// manufacturer
+export const GET_ALL_MANUFACTURER = `${BASE_URL}/manufacturer/get-all`;
+export const CREATE_MANUFACTURER = `${BASE_URL}/manufacturer/create`;
+
+
+// product
+export const GET_ALL_PRODUCT = `${BASE_URL}/product/get-all`;
+export const CREATE_PRODUCT = `${BASE_URL}/product/create`;
+export const GET_PRODUCT_BY_MANUFACTURER = `${BASE_URL}/product/get-products-by-manufacturer`;
+export const GET_PRODUCT_BY_PRODUCT_TYPE = `${BASE_URL}/product/get-products-by-product-type`;
+export const GET_PRODUCT_BY_ACESSORY_TYPE = `${BASE_URL}/product/get-products-by-accessory-type`;
+export const GET_PRODUCT_BY_SERVICE_TYPE = `${BASE_URL}/product/get-products-by-service-type`;
+export const GET_PRODUCT_BY_ID = `${BASE_URL}/product/get-product-by-id`;
+export const UPDATE_PRODUCT_BY_ID = `${BASE_URL}/product/update`;
+export const DELETE_PRODUCT_BY_ID = `${BASE_URL}/product/delete`;
+
+
+// product type
+export const GET_ALL_PRODUCT_TYPE = `${BASE_URL}/product-type/get-all`;
+export const CREATE_PRODUCT_TYPE = `${BASE_URL}/product-type/create`;
+
+
+//product-description
+export const CREATE_PRODUCT_DESCRIPTION = `${BASE_URL}/product-description/create`;
+export const GET_ALL_PRODUCT_DESCRIPTION = `${BASE_URL}/product-description/get-all`;
+export const GET_PRODUCT_DESCRIPTION_BY_PRODUCT_ID = `${BASE_URL}/product-description/get-by-product-id`;
+
+
+// role
+export const GET_ALL_ROLE = `${BASE_URL}/role/get-all`;
+export const CREATE_ROLE = `${BASE_URL}/role/create`;
+
+
+//sale
+export const GET_ALL_SALE = `${BASE_URL}/sale/get-all`;
+export const CREATE_SALE = `${BASE_URL}/sale/create`;
+
+
+//sale description
+export const GET_ALL_SALE_DESCRIPTION = `${BASE_URL}/sale-description/get-all`;
+export const CREATE_SALE_DESCRIPTION = `${BASE_URL}/sale-description/create`;
+
+
+// service type
+export const CREATE_SERVICE_TYPE = `${BASE_URL}/service-type/create`;
+export const GET_ALL_SERVICE_TYPE = `${BASE_URL}/service-type/get-all`;
+
+
+//status
+export const CREATE_STATUS = `${BASE_URL}/status/create`;
+export const GET_ALL_STATUS = `${BASE_URL}/status/get-all`;
+
+
+//user
+export const GET_ALL_USER = `${BASE_URL}/user/get-all-user`; // trang admin
+export const GET_USER_INFO = `${BASE_URL}/user/get-user-info`;
+export const CREATE_USER = `${BASE_URL}/user/create`;
+export const UPDATE_USER_INFO = `${BASE_URL}/user/update`;
+export const UPDATE_PASSWORD = `${BASE_URL}/user/update-password`;
