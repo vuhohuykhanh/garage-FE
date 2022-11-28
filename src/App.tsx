@@ -5,9 +5,9 @@ import { Routes, BrowserRouter, Route } from 'react-router-dom';
 import Services from './views/pages/Services';
 import GearDetail from './components/Gear/GearDetail';
 import ProductComponent from './components/Gear/ProductComponent';
-//import Cart from './components/Cart/index';
+import Cart from './components/Cart/index';
 //import CartDetail from './components/Cart/CartDetail';
-//import Infor from './components/Profile/index';
+import Infor from './components/Profile/index';
 import Login from './views/auth/LoginView/index';
 import Register from './views/auth/RegisterView/index';
 import ProductManage from './views/pages/Admin/ProductManage';
@@ -24,8 +24,8 @@ function App() {
 					<Route path="/services/detail/" element={<SevicesDetail />} />
 					<Route path="/gear/" element={<ProductComponent />} />
 					<Route path="/gear/detail/" element={<GearDetail />} />
-					{/*<Route path="/cart" element={<Cart />} />
-                    <Route path="/Infor" element={<Infor />} />*/}
+					<Route path="/cart" element={<Cart />} />
+					<Route path="/Infor" element={<Infor />} />
 					<Route path="/Login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					{/*<Route path="/cartDetail" element={<CartDetail />} />*/}

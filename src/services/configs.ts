@@ -45,7 +45,7 @@ export const CREATE_DESCRIPTION_TYPE  = `${BASE_URL}/description-type/create`;
 
 
 //email
-export const SEND_EMAIL = `${BASE_URL}/mail/sendMail`;
+export const SEND_EMAIL = `${BASE_URL}/mail/send-mail`;
 
 
 // manufacturer

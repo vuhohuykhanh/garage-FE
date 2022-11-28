@@ -296,7 +296,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }: any) {
                                 fontSize: '24px',
                             }}
                         >
-                            SẢN PHẨM
+                            PHỤ KIỆN
                         </TypographyeText>
                         <Box
                             mb={3}

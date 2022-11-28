@@ -7,7 +7,7 @@ import {
 	Divider,
 	Box,
 } from '@mui/material';
-import formatMoneyWithDot from '../../constants/until';
+import formatMoneyWithDot from '../../assets/constants/until';
 
 const formatMoney = (price: any, sale: any) => {
 	return formatMoneyWithDot(price - (price * sale) / 100);
