@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import TitleGearDetail from './TitleGearDetail';
 
-import { useNavigate, useLocation } from 'react-router-dom';
+import {useLocation } from 'react-router-dom';
 import { getProductByIdAPI } from '../../services/index';
-import { AnyARecord } from 'dns';
 
 export default function GearDetail() {
 	const { search } = useLocation();
 	const [product, setProduct] = React.useState<any>([]);
-	const description = product?.[0]?.description;
+	const description = product?.[0]?.productDescriptions;
 	const id = search.split('?')[1];
 
 	async function getProductByID(id: any) {
@@ -36,7 +35,6 @@ export default function GearDetail() {
 						textAlign: 'center',
 					}}
 				>
-					{/* {product?.[0]?.productTypeId?.productTypeName} */}
 					GARAGE ENMASYS
 				</Typography>
 			</Box>

@@ -2,7 +2,7 @@ import { Divider, styled, Typography, Box, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ProductItem from './ProductItemServices';
-import { getAServiceByTypeAPI } from '../../services/index';
+import { getProductByServiceTypeAPI } from '../../services/index';
 const TitleCustom = styled(Typography)(({ theme }) => ({
     position: 'relative',
     '&:after': {
@@ -24,19 +24,17 @@ const ServicesComponent = () => {
     const navigate = useNavigate();
     const id = search.split('?')[1];
 
-    //async function getAServiceByType(id: any) {
-    //    const res = await getAServiceByTypeAPI(id);
-    //    if (res?.status === 200) {
-    //        setServices(res?.data);
-    //    } else {
-    //        console.log(res);
-    //    }
-    //}
+		async function getProductByServiveType(id: any) {
+			const res = await getProductByServiceTypeAPI(id);
+			if (res?.status === 200) {
+				setServices(res?.data);
+			}
+		}
+	
+		useEffect(() => {
+			getProductByServiveType(id);
+		}, [id]);
 
-    //useEffect(() => {
-    //    getAServiceByType(id);
-    //}, [id]);
-    useEffect(() => {}, []);
     return (
         <>
             <TitleCustom
@@ -61,7 +59,7 @@ const ServicesComponent = () => {
                             md={3}
                             onClick={() =>
                                 navigate(
-                                    `/services/detail/?${service?.serviceId}`
+                                    `/services/detail/?${service?.id}`
                                 )
                             }
                             key={service.serviceId}

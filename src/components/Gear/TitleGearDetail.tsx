@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
+import { useState, useEffect, useCallback } from 'react';
+import { Box, Typography, Button } from '@mui/material';
 import AppToast from '../../myTool/AppToast';
 import { useNavigate } from 'react-router-dom';
 import formatMoneyWithDot from '../../constants/until';
@@ -11,24 +11,24 @@ export default function TitleGearDetail({ product }: any) {
     const [severity, setSeverity] = useState('');
     const navigate = useNavigate();
 
-    const checkLogin = () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            setContentToast('bạn cần login để sử dụng tính năng này');
-            setSeverity('error');
-            setOpenToast(true);
-            navigate('/login');
-        }
-    };
+    const checkLogin = useCallback(() => {
+			const token = localStorage.getItem('token');
+			if (!token) {
+					setContentToast('bạn cần login để sử dụng tính năng này');
+					setSeverity('error');
+					setOpenToast(true);
+					navigate('/login');
+			}
+	}, [navigate]);
 
     useEffect(() => {
         checkLogin();
-    }, []);
+    }, [checkLogin]);
 
     const salePrice = () => {
         return (
             product?.price -
-            (product?.price * product?.saledescription?.[0]?.salePercent) / 100
+            (product?.price * product?.saleDescriptions?.[0]?.salePercent) / 100
         );
     };
 
@@ -75,8 +75,8 @@ export default function TitleGearDetail({ product }: any) {
         >
             <img
                 className="detail_image"
-                // src={require('../../assets/images/bg1.png')}
-                src={product?.image}
+                 src={require('../../assets/images/bg1.png')}
+                //src={product?.image}
                 alt="detail_img"
                 height="500px"
             />
@@ -95,7 +95,7 @@ export default function TitleGearDetail({ product }: any) {
                         >
                             {product?.name}
                         </Typography>
-                        {product?.saledescription.length ? (
+                        {product?.saleDescriptions.length ? (
                             <Box>
                                 <Box
                                     sx={{

@@ -58,7 +58,7 @@ const ServicesComponent = () => {
 							xs={6}
 							md={3}
 							onClick={() =>
-								navigate(`/gear/detail/?${product?.productId}`)
+								navigate(`/gear/detail/?${product?.id}`)
 							}
 						>
 							{ProductItem(product)}

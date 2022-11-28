@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
+import { useState, useEffect, useCallback } from 'react';
+import { Box, Typography, Button } from '@mui/material';
 import AppToast from '../../myTool/AppToast';
 import { useNavigate } from 'react-router-dom';
 import formatMoneyWithDot from '../../constants/until';
@@ -11,28 +11,28 @@ export default function TitleService({ services }: any) {
     const [severity, setSeverity] = useState('');
     const navigate = useNavigate();
 
-    const checkLogin = () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            setContentToast('bạn cần login để sử dụng tính năng này');
-            setSeverity('error');
-            setOpenToast(true);
-            navigate('/login');
-        }
-    };
+    const checkLogin = useCallback(() => {
+			const token = localStorage.getItem('token');
+			if (!token) {
+					setContentToast('bạn cần login để sử dụng tính năng này');
+					setSeverity('error');
+					setOpenToast(true);
+					navigate('/login');
+			}
+	}, [navigate]);
 
     const salePrice = () => {
         return (
             services?.[0]?.price -
             (services?.[0]?.price *
-                services?.[0]?.saledescription?.[0]?.salePercent) /
+                services?.[0]?.saleDescriptions?.[services[0]?.saleDescriptions.length - 1]?.salePercent) /
                 100
         );
     };
 
     useEffect(() => {
         checkLogin();
-    }, []);
+    }, [checkLogin]);
 
     const handleOrder = () => {
         if (
@@ -49,7 +49,7 @@ export default function TitleService({ services }: any) {
                 servicesId: services?.[0]?.serviceId,
                 img: services?.[0]?.image,
                 name: services?.[0]?.name,
-                price: services[0]?.saledescription.length
+                price: services[0]?.saleDescriptions.length
                     ? salePrice()
                     : services?.[0]?.price,
                 quantity: 1,
@@ -80,8 +80,8 @@ export default function TitleService({ services }: any) {
         >
             <img
                 className="detail_image"
-                //src={require('../../assets/images/bg1.png')}
-                src={services[0]?.image}
+                src={require('../../assets/images/bg1.png')}
+                //src={services[0]?.image}
                 alt="detail_img"
             />
             <Box width="80%">
@@ -100,7 +100,7 @@ export default function TitleService({ services }: any) {
                             {services[0]?.name}
                         </Typography>
 
-                        {services[0]?.saledescription.length ? (
+                        {services[0]?.saleDescriptions.length ? (
                             <Box>
                                 <Box
                                     sx={{
@@ -151,10 +151,6 @@ export default function TitleService({ services }: any) {
                                             marginLeft: '61px',
                                         }}
                                     >
-                                        {/*{services[0]?.price -
-                      (services[0]?.price *
-                        services?.[0]?.saledescription?.[0]?.salePercent) /
-                        100}{' '}*/}
                                         {formatMoneyWithDot(salePrice())}
                                     </Typography>
                                 </Box>
@@ -181,7 +177,6 @@ export default function TitleService({ services }: any) {
                                 </Typography>
                             </Box>
                         )}
-
                         <Box
                             width="100%"
                             sx={{

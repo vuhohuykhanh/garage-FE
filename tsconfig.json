@@ -11,7 +11,8 @@
       "@/*": ["./src/*"],
       "@/public/*": ["./public/*"],
       "@/styles/*": ["./styles/*"]
-    }
+    },
+		"plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
 	"include": ["**/*.ts", "**/*.tsx", "src/types/index.d.ts"],
 	"exclude": ["node_modules"]
