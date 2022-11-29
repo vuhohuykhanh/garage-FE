@@ -18,7 +18,7 @@ const ProductItemService = (service: any) => {
 		<>
 			<Card
 				sx={{ backgroundColor: '#FFFFFF', height: 430 }}
-				className="productCard"
+				className={styles.productCard}
 				key={service.serviceId}
 			>
 				<CardMedia
@@ -57,13 +57,13 @@ const ProductItemService = (service: any) => {
 							variant="body2"
 							className={
 								service?.saleDescriptions?.[0]?.salePercent
-									? 'typical_price'
-									: 'sale_price'
+									? styles.typical_price
+									: styles.sale_price
 							}
 						>
 							{formatMoneyWithDot(service.price)}
 						</Typography>
-						<Typography variant="body2" className="sale_price">
+						<Typography variant="body2" className={styles.sale_price}>
 							{service?.saleDescriptions?.[0]?.salePercent
 								? formatMoney(
 									service.price,
@@ -87,7 +87,6 @@ const ProductItemService = (service: any) => {
 								top: '50%',
 								left: '50%',
 								transform: 'translate(-50%, -50%)',
-								fontSize: '12px',
 							}}
 						>
 							{service?.saleDescriptions?.[0]?.salePercent}

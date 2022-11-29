@@ -4,6 +4,7 @@ import AppToast from '../../myTool/AppToast';
 import { useNavigate } from 'react-router-dom';
 import formatMoneyWithDot from '../../assets/constants/until';
 import { CartType } from '../../assets/constants/all-enum';
+import styles from '../style.module.css'
 
 export default function TitleService({ services }: any) {
 	const storageItems = JSON.parse(localStorage.getItem('items') as any);
@@ -79,7 +80,7 @@ export default function TitleService({ services }: any) {
 			}}
 		>
 			<img
-				className="detail_image"
+				className={styles.detail_image}
 				src={require('../../assets/images/bg1.png')}
 				//src={services[0]?.image}
 				alt="detail_img"

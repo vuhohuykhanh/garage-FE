@@ -8,6 +8,7 @@ import {
 	Box,
 } from '@mui/material';
 import formatMoneyWithDot from '../../assets/constants/until';
+import styles from '../style.module.css';
 
 const formatMoney = (price: any, sale: any) => {
 	return formatMoneyWithDot(price - (price * sale) / 100);
@@ -18,7 +19,7 @@ const ProductItemService = (product: any) => {
 		<>
 			<Card
 				sx={{ backgroundColor: '#FFFFFF', height: 430 }}
-				className="productCard"
+				className={styles.productCard}
 			>
 				<CardMedia
 					component="img"
@@ -55,13 +56,13 @@ const ProductItemService = (product: any) => {
 							variant="body2"
 							className={
 								product?.saleDescriptions?.[0]?.salePercent
-									? 'typical_price'
-									: 'sale_price'
+									? styles.typical_price
+									: styles.sale_price
 							}
 						>
 							{formatMoneyWithDot(product.price)}
 						</Typography>
-						<Typography variant="body2" className="sale_price">
+						<Typography variant="body2" className={styles.sale_price}>
 							{product?.saleDescriptions?.[0]?.salePercent
 								? formatMoney(
 									product?.price,

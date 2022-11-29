@@ -29,6 +29,7 @@ import {
 } from '../../assets/constants';
 
 import { updatePasswordAPI, updateInfoAPI } from '../../services/index';
+import styles from '../style.module.css';
 
 function Infor() {
 	const [userInfo, setUserInfo] = useState<any>({});
@@ -184,7 +185,7 @@ function Infor() {
                         />
                     )}*/}
 					<Container maxWidth="md">
-						<div className="user_avatar">
+						<div className={styles.user_avatar}>
 							<Badge
 								overlap="circular"
 								anchorOrigin={{
@@ -212,7 +213,7 @@ function Infor() {
 											: require('../../assets/images/default_avatar.png')
 									}
 									alt="user_avatar"
-									className="user_avatar-image"
+									className={styles.user_avatarImage}
 								/>
 							</Badge>
 						</div>

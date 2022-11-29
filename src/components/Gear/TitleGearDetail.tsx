@@ -4,6 +4,7 @@ import AppToast from '../../myTool/AppToast';
 import { useNavigate } from 'react-router-dom';
 import formatMoneyWithDot from '../../assets/constants/until';
 import { CartType } from '../../assets/constants/all-enum';
+import styles from '../style.module.css'
 
 export default function TitleGearDetail({ product }: any) {
 	const storageItems = JSON.parse(localStorage.getItem('items') as any);
@@ -74,7 +75,7 @@ export default function TitleGearDetail({ product }: any) {
 			}}
 		>
 			<img
-				className="detail_image"
+				className={styles.detail_image}
 				src={require('../../assets/images/bg1.png')}
 				//src={product?.image}
 				alt="detail_img"

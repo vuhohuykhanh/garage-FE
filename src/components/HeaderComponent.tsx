@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Typography, Input, Avatar, Button, Popper } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Box, Typography, Button, Popper } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
@@ -8,7 +8,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { getAllServiceTypeAPI, getAllAccessoryTypeAPI } from '../services/index';
-// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import styles from './style.module.css'
 
 const arrLogo = [
     {
@@ -136,7 +136,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }: any) {
                         {/* <ArrowDropDownIcon color="action" /> */}
                     </Button>
                 </BoxContentHeader>
-                <Box className="headerLogo" onClick={() => navigate('/')}>
+                <Box className={styles.headerLogo} onClick={() => navigate('/')}>
                     <img
                         src={require('../assets/images/Logo.png')}
                         alt="Logo"
@@ -191,22 +191,22 @@ export default function HeaderComponent({ userInfo, setUserInfo }: any) {
                                     }}
                                     open={Boolean(anchorElProfile)}
                                     onClose={handleClose}
-                                    className="header_menuUser"
+                                    className={styles.header_menuUser}
                                 >
                                     <MenuItem
-                                        className="header_menuUser-item"
+                                        //className={styles.header_menuUser-item}
                                         onClick={handleInfo}
                                     >
                                         Trang cá nhân
                                     </MenuItem>
                                     <MenuItem
-                                        className="header_menuUser-item"
+                                        //className={styles.header_menuUser-item}
                                         onClick={handleCartDetail}
                                     >
                                         Quản lý đơn hàng
                                     </MenuItem>
                                     <MenuItem
-                                        className="header_menuUser-item"
+                                        //className={styles.header_menuUser-item}
                                         onClick={handleLogout}
                                     >
                                         Đăng xuất
@@ -259,7 +259,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }: any) {
                             {services?.map((e: any) => (
                                 <Box
                                     key={e?.id}
-                                    className="header-list"
+                                    className={styles.headerList}
                                     onClick={() => {
                                         navigate(
                                             `/services/?${e?.id}`
@@ -309,7 +309,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }: any) {
                             {product?.map((e: any) => (
                                 <Box
                                     key={e?.id}
-                                    className="header-list"
+                                    className={styles.headerList}
                                     onClick={() => {
                                         navigate(`/gear/?${e?.id}`);
                                         setIsAnchorEl(null);

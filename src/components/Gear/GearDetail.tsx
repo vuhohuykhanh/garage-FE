@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import TitleGearDetail from './TitleGearDetail';
 
 import {useLocation } from 'react-router-dom';
 import { getProductByIdAPI } from '../../services/index';
+import styles from '../style.module.css'
 
 export default function GearDetail() {
 	const { search } = useLocation();
@@ -58,7 +59,7 @@ export default function GearDetail() {
 			<TitleGearDetail product={product?.[0]} />
 			<Box width="80%" m="auto">
 				{description?.map((value: any) => (
-					<Typography key={value._id} className={value.type}>
+					<Typography key={value._id} className={styles.value?.type}>
 						{value.content}
 					</Typography>
 				))}

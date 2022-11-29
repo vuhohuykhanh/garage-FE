@@ -6,7 +6,7 @@ import Services from './views/pages/Services';
 import GearDetail from './components/Gear/GearDetail';
 import ProductComponent from './components/Gear/ProductComponent';
 import Cart from './components/Cart/index';
-//import CartDetail from './components/Cart/CartDetail';
+import CartDetail from './components/Cart/CartDetail';
 import Infor from './components/Profile/index';
 import Login from './views/auth/LoginView/index';
 import Register from './views/auth/RegisterView/index';
@@ -28,7 +28,7 @@ function App() {
 					<Route path="/Infor" element={<Infor />} />
 					<Route path="/Login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
-					{/*<Route path="/cartDetail" element={<CartDetail />} />*/}
+					<Route path="/cartDetail" element={<CartDetail />} />
 				</Route>
 			</Routes>
 			<Routes>

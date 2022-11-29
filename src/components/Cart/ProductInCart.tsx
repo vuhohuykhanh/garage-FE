@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Box, Typography, Button, TextField } from '@mui/material';
 
 import formatMoneyWithDot from '../../assets/constants/until';
@@ -10,15 +10,30 @@ export default function ProductInCart({
 	setChange,
 	change,
 }: any) {
-	const [quantity, setQuantity] = useState(item?.quantity);
+	const [quantity, setQuantity] = useState<number>(item?.quantity);
+
+	const handleChangeQuantity = useCallback((quantityProps: number) => {
+		if (quantityProps > item?.stock) {
+			setQuantity(item?.stock);
+		} else {
+			setQuantity(quantityProps)
+			const listNewItems = items.map((value: any) => {
+				if (value.id === item?.id) {
+					value.quantity = quantityProps;
+				}
+				return value;
+			});
+			setItems(listNewItems);
+		}
+	}, [item?.id, item?.stock, items, setItems])
 
 	const handleIncrease = () => {
-		setQuantity(quantity + 1);
+		handleChangeQuantity(quantity + 1);
 	};
 
 	const handleDecrease = () => {
 		if (quantity > 1) {
-			setQuantity(quantity - 1);
+			handleChangeQuantity(quantity - 1);
 		}
 	};
 
@@ -32,19 +47,20 @@ export default function ProductInCart({
 	};
 
 	//useEffect(() => {
-	//	setChange(!change);
+	//	//setChange(!change);
 	//	if (quantity > item?.stock) {
 	//		setQuantity(item?.stock);
 	//	} else {
 	//		const listNewItems = items.map((value: any) => {
-	//			if (value.productId === item?.productId) {
+	//			if (value.id === item?.id) {
 	//				value.quantity = quantity;
 	//			}
 	//			return value;
 	//		});
-	//		setItems(listNewItems);
+	//		console.log('listNewItems', listNewItems);
+	//		//setItems(listNewItems);
 	//	}
-	//}, [change, item?.productId, item?.stock, items, quantity, setChange, setItems]);
+	//}, [change, item?.id, item?.stock, items, quantity, setChange, setItems]);
 
 	return (
 		<Box
@@ -116,12 +132,16 @@ export default function ProductInCart({
 					<TextField
 						type="number"
 						color="secondary"
-						value={quantity || 1}
+						value={quantity}
 						onChange={(e) => {
 							if (e.target.value > item?.stock) {
-								setQuantity(item?.stock);
-							} else {
-								setQuantity(e.target.value);
+								handleChangeQuantity(item?.stock);
+							}
+							else if (Number(e.target.value) < 1) {
+								handleChangeQuantity(1);
+							}
+							else {
+								handleChangeQuantity(Number(e.target.value));
 							}
 						}}
 					/>

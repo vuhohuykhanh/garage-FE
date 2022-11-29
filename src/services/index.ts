@@ -97,11 +97,37 @@ export const forgotPasswordAPI = async (body: any) => {
 //bill
 
 //cart
+export const getCartByUserIdAPI = async (id: any) => {
+	try {
+    const response = await axios.get(`${GET_CART_BY_USER_ID}?idCardNumber=${id}`);
+    return response;
+  } catch (error: any) {
+    return error?.response?.data || error;
+  }
+};
+
+export const deleteCartByIdAPI = async (id: any) => {
+	try {
+    const response = await axios.delete(`${DELETE_CART_MAIN}/${id}`);
+    return response;
+  } catch (error: any) {
+    return error?.response?.data || error;
+  }
+};
 
 //cart-description
 export const createCartDescriptionAPI = async (body: any) => {
   try {
     const response = await axios.post(CREATE_CART_DESCRIPTION, body);
+    return response;
+  } catch (error: any) {
+    return error?.response?.data || error;
+  }
+};
+
+export const getCartDescriptionByCartIdAPI = async (id: any) => {
+  try {
+    const response = await axios.get(`${GET_CART_DESCRIPTION_BY_CART_ID}?cartId=${id}`);
     return response;
   } catch (error: any) {
     return error?.response?.data || error;
@@ -260,10 +286,6 @@ export const updateInfoAPI = async (body: any) => {
 
 //--------------------------------------------
 
-export const deleteCartByIdAPI = async (id: any) => {
-  return [];
-};
-
 export const deleteCardAPI = async (id: any) => {
   return [];
 };
@@ -271,9 +293,7 @@ export const deleteCardAPI = async (id: any) => {
 export const confirmCartByIdAPI = async (body: any) => {
   return [];
 };
-export const getCartByIdAPI = async (id: any) => {
-  return [];
-};
+
 export const getCartDescriptionAPI = async (id: any) => {
   return [];
 };

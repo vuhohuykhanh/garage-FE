@@ -3,6 +3,7 @@ import { Box, Typography} from '@mui/material';
 import TitleService from './TitleService';
 import { useLocation } from 'react-router-dom';
 import { getProductByIdAPI } from '../../services/index';
+import styles from '../style.module.css';
 
 export default function SevicesDetail() {
 	const { search } = useLocation();
@@ -57,7 +58,7 @@ export default function SevicesDetail() {
 			<TitleService services={services} />
 			<Box width="80%" m="auto">
 				{description?.map((value: any) => (
-					<Typography key={value._id} className={value.type}>
+					<Typography key={value._id} className={styles.value?.type}>
 						{value.content}
 					</Typography>
 				))}

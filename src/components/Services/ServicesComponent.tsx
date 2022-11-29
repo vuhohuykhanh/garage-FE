@@ -47,7 +47,7 @@ const ServicesComponent = () => {
                 DỊCH VỤ
             </TitleCustom>
             <Typography variant="h5" fontWeight="700">
-                {services[0]?.serviceTypeId?.serviceTypeName}
+                {services[0]?.serviceType?.name}
             </Typography>
             <Divider />
             <Box sx={{ flexGrow: 1, mb: 12, mt: 6 }}>

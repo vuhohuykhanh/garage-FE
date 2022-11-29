@@ -12,23 +12,24 @@ import { getUserInfo, createCartDescriptionAPI } from '../../services/index';
 
 import formatMoneyWithDot from '../../assets/constants/until';
 import { CartType } from '../../assets/constants/all-enum';
+import styles from '../style.module.css';
 
 export default function Cart() {
 	const storageItems = JSON.parse(localStorage.getItem('items') as any);
-	const [items, setItems] = useState(storageItems || []);
+	const [itemsInCart, setItemsInCart] = useState(storageItems || []);
 	const [change, setChange] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [services, setServices] = useState([]);
 	const [didEmail, setDidEmail] = React.useState(false);
 
 	const [totalPrice, setTotalPrice] = useState(
-		items?.reduce((a: any, b: any) => a + b?.price * b?.quantity, 0)
+		itemsInCart?.reduce((a: any, b: any) => a + b?.price * b?.quantity, 0)
 	);
 
 	const navigate = useNavigate();
 	useEffect(() => {
-		setTotalPrice(items?.reduce((a: any, b: any) => a + b?.price * b?.quantity, 0));
-	}, [change, items]);
+		setTotalPrice(itemsInCart?.reduce((a: any, b: any) => a + b?.price * b?.quantity, 0));
+	}, [change, itemsInCart]);
 
 	const checkLogin = useCallback(() => {
 		const token = localStorage.getItem('token');
@@ -42,7 +43,7 @@ export default function Cart() {
 	const onGetUserInformation = useCallback(async () => {
 		const response = await getUserInfo();
 		if (response?.status === 200) {
-			setIdUser(response?.data?._id);
+			setIdUser(response?.data?.id);
 		} else {
 			setIdUser(null as any);
 		}
@@ -64,22 +65,16 @@ export default function Cart() {
 	};
 
 	const createCartMain = () => {
-		const products = items
-			?.filter((value: any) => value?.type === CartType.ACCESSORY)
+		const products = itemsInCart
 			.map((value: any) => ({
-				productId: value?.id,
-				productPrice: value?.price,
+				id: value?.id,
 				quantity: value?.quantity,
+				price: value?.price,
 			}));
 
-		const services = items
-			?.filter((value: any) => value?.type === CartType.SERVICE)
-			.map((value: any) => ({
-				serviceId: value?.id,
-				serviceName: value?.name,
-				servicePrice: value?.price,
-				quantity: value?.quantity,
-			}));
+		if (products?.length === 0) {
+			return;
+		}
 
 		if (services?.length && !didEmail) {
 			setServices(services);
@@ -87,10 +82,9 @@ export default function Cart() {
 		} else {
 			setOpen(false);
 			const body = {
-				idUser: idUser,
+				customer: idUser,
 				totalPrice: totalPrice,
-				products: products,
-				services: services,
+				product: products,
 			};
 
 			createCartAction(body);
@@ -189,11 +183,11 @@ export default function Cart() {
 					</Typography>
 				</Box>
 			</Box>
-			{items?.map((item: any) => (
+			{itemsInCart?.map((item: any) => (
 				<ProductInCart
 					item={item}
-					setItems={setItems}
-					items={items}
+					setItems={setItemsInCart}
+					items={itemsInCart}
 					setChange={setChange}
 					change={change}
 				/>
@@ -257,7 +251,7 @@ export default function Cart() {
 				}}
 			>
 				<Button
-					className="btnPay"
+					className={styles.btnPay}
 					sx={{
 						width: '200px',
 						height: '49px',
