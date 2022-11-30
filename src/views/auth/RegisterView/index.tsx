@@ -82,7 +82,8 @@ function Register() {
 	async function signUp(body: any) {
 		const res = await signUpAPI(body);
 		if (res?.status === 200) {
-			setContentToast(res.data);
+			console.log('res', res);
+			setContentToast(res?.data);
 			setSeverity('success');
 			setOpenToast(true);
 			setAccount('');
@@ -278,7 +279,7 @@ function Register() {
 
 					<div>
 						<FormControl
-							sx={{ m: 1, width: '40ch' }}
+							sx={{ m: 1, width: '80ch' }}
 							variant="outlined"
 						>
 							<InputLabel htmlFor="phoneNumber">
@@ -297,20 +298,6 @@ function Register() {
 									bằng 0
 								</FormHelperText>
 							)}
-						</FormControl>
-
-						<FormControl
-							sx={{ m: 1, width: '40ch' }}
-							variant="outlined"
-						>
-							<InputLabel htmlFor="avatar">Avatar</InputLabel>
-							<OutlinedInput
-								id="avatar"
-								type={'text'}
-								value={avatar}
-								onChange={(e) => setAvatar(e.target.value)}
-								label="Avatar"
-							/>
 						</FormControl>
 					</div>
 					<br />

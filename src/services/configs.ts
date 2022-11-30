@@ -105,5 +105,6 @@ export const GET_ALL_STATUS = `${BASE_URL}/status/get-all`;
 export const GET_ALL_USER = `${BASE_URL}/user/get-all-user`; // trang admin
 export const GET_USER_INFO = `${BASE_URL}/user/get-user-info`;
 export const CREATE_USER = `${BASE_URL}/user/create`;
+export const UPLOAD_USER_AVATAR = `${BASE_URL}/user/upload-avatar`;
 export const UPDATE_USER_INFO = `${BASE_URL}/user/update`;
 export const UPDATE_PASSWORD = `${BASE_URL}/user/update-password`;

@@ -50,6 +50,7 @@ import {
   GET_ALL_USER,
   GET_USER_INFO,
   CREATE_USER,
+	UPLOAD_USER_AVATAR,
   UPDATE_USER_INFO,
   UPDATE_PASSWORD,
 } from './configs';
@@ -265,6 +266,18 @@ export const getUserInfo = async () => {
     return error?.response?.data || error;
   }
 };
+
+export const uploadAvatar = async (file: any) => {
+	try{
+		const response = await axios.post(UPLOAD_USER_AVATAR, {file: file}, {
+			headers: {'Content-Type': 'multipart/form-data'}
+		});
+		return response;
+	}
+	catch{
+
+	}
+}
 
 export const updatePasswordAPI = async (body: any) => {
   try {
