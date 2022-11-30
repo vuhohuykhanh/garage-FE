@@ -12,6 +12,7 @@ import { getUserInfo, createCartDescriptionAPI } from '../../services/index';
 
 import formatMoneyWithDot from '../../assets/constants/until';
 import { CartType } from '../../assets/constants/all-enum';
+import AppToast from '../../myTool/AppToast';
 import styles from '../style.module.css';
 
 export default function Cart() {
@@ -21,6 +22,9 @@ export default function Cart() {
 	const [open, setOpen] = useState(false);
 	const [services, setServices] = useState([]);
 	const [didEmail, setDidEmail] = React.useState(false);
+	const [openToast, setOpenToast] = React.useState(false);
+	const [contentToast, setContentToast] = React.useState('');
+	const [severity, setSeverity] = React.useState('');
 
 	const [totalPrice, setTotalPrice] = useState(
 		itemsInCart?.reduce((a: any, b: any) => a + b?.price * b?.quantity, 0)
@@ -58,21 +62,36 @@ export default function Cart() {
 		const res = await createCartDescriptionAPI(body);
 		if (res?.status === 200) {
 			localStorage.removeItem('items');
-			navigate('/');
+			setOpenToast(true);
+			setContentToast('Tạo đơn hàng thành công');
+			setSeverity('success');
+			setTimeout(() => navigate('/'), 1000)
 		} else {
-			console.log(res?.data);
+			setOpenToast(true);
+			setContentToast('Đã xảy ra lỗi khi thanh toán');
+			setSeverity('error');
 		}
 	};
 
 	const createCartMain = () => {
 		const products = itemsInCart
+			?.filter((value: any) => value?.type === CartType.ACCESSORY)
 			.map((value: any) => ({
 				id: value?.id,
 				quantity: value?.quantity,
-				price: value?.price,
+				price: value?.price
 			}));
 
-		if (products?.length === 0) {
+		const services = itemsInCart
+			?.filter((value: any) => value?.type === CartType.SERVICE)
+			.map((value: any) => ({
+				id: value?.id,
+				serviceName: value?.name,
+				quantity: value?.quantity,
+				price: value?.price
+			}));
+
+		if (products?.length === 0 && services?.length === 0) {
 			return;
 		}
 
@@ -84,7 +103,7 @@ export default function Cart() {
 			const body = {
 				customer: idUser,
 				totalPrice: totalPrice,
-				product: products,
+				product: [...products, ...services],
 			};
 
 			createCartAction(body);
@@ -277,6 +296,15 @@ export default function Cart() {
 				setOpen={setOpen}
 				services={services}
 				setDidEmail={setDidEmail}
+			/>
+			<AppToast
+				content={contentToast}
+				type={0}
+				isOpen={openToast}
+				severity={severity}
+				callback={() => {
+					setOpenToast(false);
+				}}
 			/>
 		</Box>
 	);

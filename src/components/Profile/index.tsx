@@ -77,9 +77,6 @@ function Infor() {
 		}
 	};
 
-	console.log('user', userInfo?.avatar?.data);
-	console.log(Buffer.from(userInfo?.avatar))
-
 	const updatePassword = async () => {
 		if (password !== '' && newPassword !== '' && reNewPassword !== '') {
 			if (newPassword === reNewPassword) {

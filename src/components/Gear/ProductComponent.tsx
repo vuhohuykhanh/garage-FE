@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import ProductItem from './Product';
 
-import { getProductByServiceTypeAPI } from '../../services/index';
+import { getProductByAccessoryTypeAPI } from '../../services/index';
 const TitleCustom = styled(Typography)(({ theme }) => ({
 	position: 'relative',
 	'&:after': {
@@ -25,7 +25,7 @@ const ServicesComponent = () => {
 	const id = search.split('?')[1];
 
 	async function getProductByType(id: any) {
-		const res = await getProductByServiceTypeAPI(id);
+		const res = await getProductByAccessoryTypeAPI(id);
 		if (res?.status === 200) {
 			setServices(res?.data);
 		}

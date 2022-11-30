@@ -27,7 +27,7 @@ import {
   CREATE_PRODUCT,
   GET_PRODUCT_BY_MANUFACTURER,
   GET_PRODUCT_BY_PRODUCT_TYPE,
-  GET_PRODUCT_BY_ACESSORY_TYPE,
+  GET_PRODUCT_BY_ACCESSORY_TYPE,
   GET_PRODUCT_BY_SERVICE_TYPE,
   GET_PRODUCT_BY_ID,
   UPDATE_PRODUCT_BY_ID,
@@ -177,7 +177,7 @@ export const getProductByProductTypeAPI = async (id: any) => {
 export const getProductByAccessoryTypeAPI = async (id: any) => {
   try {
     const response = await axios.get(
-      `${GET_PRODUCT_BY_PRODUCT_TYPE}?accessoryTypeId=${id}`
+      `${GET_PRODUCT_BY_ACCESSORY_TYPE}?accessoryTypeId=${id}`
     );
     return response;
   } catch (error: any) {

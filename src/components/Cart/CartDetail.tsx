@@ -19,6 +19,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import KeyboardArrowUpIcon from '@mui/icons-material/ArrowDownward';
 import KeyboardArrowDownIcon from '@mui/icons-material/ArrowUpward';
+import AppToast from '../../myTool/AppToast';
 
 // import
 
@@ -36,6 +37,9 @@ function Row(props: any) {
 	const [open, setOpen] = React.useState(false);
 	const [item, setItem] = useState<any>([]);
 	const [totalPirceCartmsets, setTotalPirceCartmsets] = useState(0);
+	const [openToast, setOpenToast] = React.useState(false);
+	const [contentToast, setContentToast] = React.useState('');
+	const [severity, setSeverity] = React.useState('');
 
 	const [openDialog, setOpenDialog] = useState(false);
 
@@ -117,8 +121,15 @@ function Row(props: any) {
 		try {
 			const res = await deleteCartByIdAPI(row?.id);
 			if (res?.status === 200) {
+				setOpenToast(true);
+				setContentToast('Hủy đơn hàng thành công');
+				setSeverity('success');
 				setOpenDialog(false)
-				getCartById(idUser);
+				setTimeout(() => getCartById(idUser), 1000)
+			} else {
+				setOpenToast(true);
+				setContentToast('Đã xảy ra lỗi khi hủy đơn hàng');
+				setSeverity('error');
 			}
 		} catch (error) { }
 	};
@@ -382,6 +393,15 @@ function Row(props: any) {
 					</Button>
 				</DialogActions>
 			</Dialog>
+			<AppToast
+				content={contentToast}
+				type={0}
+				isOpen={openToast}
+				severity={severity}
+				callback={() => {
+					setOpenToast(false);
+				}}
+			/>
 		</React.Fragment>
 	);
 }
