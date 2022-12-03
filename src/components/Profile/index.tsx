@@ -48,7 +48,7 @@ function Infor() {
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [email, setEmail] = useState('');
 	const [address, setAddress] = useState('');
-	const [avatar, setAvatar] = useState('');
+	const [avatar, setAvatar] = useState<any>('');
 
 	const [password, setPassword] = useState('');
 	const [newPassword, setNewPassword] = useState('');
@@ -174,16 +174,6 @@ function Infor() {
 					>
 						THÔNG TIN CÁ NHÂN
 					</Typography>
-					{/*{loading && (
-                        <CircularProgress
-                            style={{
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                zIndex: 100,
-                            }}
-                        />
-                    )}*/}
 					<Container maxWidth="md">
 						<div className={styles.user_avatar}>
 							<Badge
@@ -208,8 +198,8 @@ function Infor() {
 							>
 								<img
 									src={
-										userInfo?.avatar
-											? userInfo?.avatar?.data
+										avatar
+											? `http://localhost:5000/api/image/${avatar.filename}`
 											: require('../../assets/images/default_avatar.png')
 									}
 									alt="user_avatar"

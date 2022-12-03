@@ -59,13 +59,13 @@ function Login() {
 		setOpen(false);
 	};
 
-	async function changPassword(data: any) {
+	async function changePassword(data: any) {
 		const res = await forgotPasswordAPI(data);
 		if (res?.status === 200) {
-			setOpenToast(true);
-			setContentToast(res?.data);
-			setSeverity('success');
 			setOpen(false);
+			setOpenToast(true);
+			setSeverity('success');
+			setContentToast(res?.data);
 		} else {
 			setOpenToast(true);
 			setContentToast(res);
@@ -84,8 +84,7 @@ function Login() {
 				idCardNumber,
 				newPassword,
 			};
-
-			changPassword(data);
+			changePassword(data);
 		}
 	};
 

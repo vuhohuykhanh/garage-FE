@@ -82,7 +82,6 @@ function Register() {
 	async function signUp(body: any) {
 		const res = await signUpAPI(body);
 		if (res?.status === 200) {
-			console.log('res', res);
 			setContentToast(res?.data);
 			setSeverity('success');
 			setOpenToast(true);
