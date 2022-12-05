@@ -24,9 +24,10 @@ const ProductItemService = (service: any) => {
 				<CardMedia
 					component="img"
 					height="200"
-					image={require('../../assets/images/293399859_6014255531934980_2866254695672486007_n.jpg')}
-					// image={url(service?.image)}
-					//src={service?.image}
+					src={service?.image 
+						? `http://localhost:5000/api/image/${service?.image?.filename}`
+						: require('../../assets/images/293399859_6014255531934980_2866254695672486007_n.jpg')
+					}
 					alt="green iguana"
 				/>
 				<CardHeader

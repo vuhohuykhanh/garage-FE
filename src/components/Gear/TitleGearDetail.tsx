@@ -76,7 +76,10 @@ export default function TitleGearDetail({ product }: any) {
 		>
 			<img
 				className={styles.detail_image}
-				src={require('../../assets/images/bg1.png')}
+				src={product?.image
+					? `http://localhost:5000/api/image/${product?.image?.filename}`
+					 : require('../../assets/images/bg1.png')
+				}
 				//src={product?.image}
 				alt="detail_img"
 				height="500px"

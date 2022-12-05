@@ -107,9 +107,10 @@ export const getCartByUserIdAPI = async (id: any) => {
   }
 };
 
-export const deleteCartByIdAPI = async (id: any) => {
+// hủy cả đơn hàng
+export const deleteCartByIdAPI = async (body: any) => {
 	try {
-    const response = await axios.delete(`${DELETE_CART_MAIN}/${id}`);
+    const response = await axios.delete(`${DELETE_CART_MAIN}?cartId=${body.cartId}&idUser=${body.idUser}`);
     return response;
   } catch (error: any) {
     return error?.response?.data || error;
@@ -129,6 +130,24 @@ export const createCartDescriptionAPI = async (body: any) => {
 export const getCartDescriptionByCartIdAPI = async (id: any) => {
   try {
     const response = await axios.get(`${GET_CART_DESCRIPTION_BY_CART_ID}?cartId=${id}`);
+    return response;
+  } catch (error: any) {
+    return error?.response?.data || error;
+  }
+};
+
+export const confirmCartDescriptionByIdAPI = async (body: any) => {
+  try {
+    const response = await axios.patch(CONFIRM_CART_DESCRIPTION_BY_ID, body);
+    return response;
+  } catch (error: any) {
+    return error?.response?.data || error;
+  }
+};
+
+export const deleteCartDescriptionByIdAPI = async (id: string) => {
+  try {
+    const response = await axios.delete(`${DELETE_CART_DESCRIPTION_BY_ID}/${id}`);
     return response;
   } catch (error: any) {
     return error?.response?.data || error;
@@ -303,10 +322,6 @@ export const deleteCardAPI = async (id: any) => {
   return [];
 };
 
-export const confirmCartByIdAPI = async (body: any) => {
-  return [];
-};
-
 export const getCartDescriptionAPI = async (id: any) => {
   return [];
 };
@@ -330,15 +345,6 @@ export const updateServiceByIDAPI = async (id: any) => {
 export const deleteServiceByIDAPI = async (id: any) => {
   return [];
 };
-
-//export const deleteCartByIdAPI = async (id: any) => {
-//  try {
-//    const response = [];
-//    return response;
-//  } catch (error: any) {
-//    return error?.response?.data || error;
-//  }
-//};
 
 //export const deleteCardAPI = async (id: any) => {
 //  try {

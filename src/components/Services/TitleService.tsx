@@ -32,6 +32,8 @@ export default function TitleService({ services }: any) {
 		);
 	};
 
+	console.log('services', services)
+
 	useEffect(() => {
 		checkLogin();
 	}, [checkLogin]);
@@ -81,7 +83,10 @@ export default function TitleService({ services }: any) {
 		>
 			<img
 				className={styles.detail_image}
-				src={require('../../assets/images/bg1.png')}
+				src={services?.[0]?.image
+					? `http://localhost:5000/api/image/${services?.[0]?.image?.filename}`
+					 : require('../../assets/images/bg1.png')
+				}
 				//src={services[0]?.image}
 				alt="detail_img"
 			/>

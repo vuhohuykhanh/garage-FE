@@ -27,19 +27,22 @@ import {
 	getCartByUserIdAPI,
 	getCartDescriptionByCartIdAPI,
 	deleteCartByIdAPI,
-	confirmCartByIdAPI,
+	confirmCartDescriptionByIdAPI,
+	deleteCartDescriptionByIdAPI,
 	getUserInfo,
 } from '../../services/index';
 import { CartDetail } from '../../assets/constants/all-enum';
 
 function Row(props: any) {
-	const { row, getCartById, idUser } = props;
+	const { row, getCartById, idUser, idCardNumber } = props;
 	const [open, setOpen] = React.useState(false);
-	const [item, setItem] = useState<any>([]);
 	const [totalPirceCartmsets, setTotalPirceCartmsets] = useState(0);
 	const [openToast, setOpenToast] = React.useState(false);
 	const [contentToast, setContentToast] = React.useState('');
 	const [severity, setSeverity] = React.useState('');
+	const [listProduct, setListProduct] = useState<any>([]);
+	const [listService, setListService] = useState<any>([]);
+	const [listProductAdd, setListProductAdd] = useState<any>([]);
 
 	const [openDialog, setOpenDialog] = useState(false);
 
@@ -50,58 +53,70 @@ function Row(props: any) {
 	}
 
 	useEffect(() => {
-		const priceServices =
-			item?.services?.reduce(
-				(a: any, b: any) => a + b?.quantity * b?.serviceId?.price,
-				0
-			) || 0;
+		//const priceServices =
+		//	listProduct?.services?.reduce(
+		//		(a: any, b: any) => a + b?.quantity * b?.service?.price,
+		//		0
+		//	) || 0;
 		const priceProduct =
-			item?.products?.reduce(
-				(a: any, b: any) => a + b?.quantity * b?.productId?.price,
+			listProduct?.reduce(
+				(a: any, b: any) => a + b?.quantity * b?.product?.price,
 				0
 			) || 0;
 		const priceProductAdd =
-			item?.productAdd?.reduce(
-				(a: any, b: any) => a + b?.quantity * b?.productId?.price,
+			listProductAdd?.reduce(
+				(a: any, b: any) => a + b?.quantity * b?.product?.price,
 				0
 			) || 0;
-		setTotalPirceCartmsets(priceServices + priceProduct + priceProductAdd);
-	}, [item]);
+		//setTotalPirceCartmsets(priceServices + priceProduct + priceProductAdd);
+		setTotalPirceCartmsets(priceProduct + priceProductAdd);
+	}, [listProduct, listProductAdd]);
 
 	const getCartDescription = async (id: any) => {
 		try {
 			const res = await getCartDescriptionByCartIdAPI(id);
-			setItem(res?.data);
+			if (res?.status === 200) {
+				setListProduct(res?.data?.filter((value: any) => value?.type !== 'Báo giá'));
+				setListProductAdd(res?.data?.filter((value: any) => value?.type === 'Báo giá'));
+			}
 		} catch (error) { }
 	};
-	//const confirmCartById = async (id: any, afterPrice: any) => {
-	//	const body = {
-	//		id: id,
-	//		newPrice: afterPrice,
-	//	};
 
-	//	try {
-	//		const res = await confirmCartByIdAPI(body);
-	//		setItem(res?.data);
-	//		getCartById(idUser);
-	//	} catch (error) { }
-	//};
+	//confirm cart description
+	const confirmCartById = async (id: any, afterPrice: any) => {
+		const body = {
+			id: id,
+			newPrice: afterPrice,
+		};
 
-	//const deleteCartById = async (id: any) => {
-	//	try {
-	//		const res = await deleteCartByIdAPI(id);
-	//		setItem(res?.data);
-	//	} catch (error) { }
-	//};
-
-	const handleConfirm = (id: any, afterPrice: any) => {
-		setOpen(!open);
-		//confirmCartById(id, afterPrice);
+		try {
+			const res = await confirmCartDescriptionByIdAPI(body);
+			if (res?.status === 200) {
+				getCartById(idCardNumber);
+				getCartDescription(row?.id)
+			}
+		} catch (error) { }
 	};
 
-	const handleDelete = (id: any) => {
+	// delete cart additional
+	const deleteAdditionalProductInCart = async (id: any) => {
+		try {
+			const res = await deleteCartDescriptionByIdAPI(id);
+			if (res?.status === 200) {
+				getCartById(idCardNumber);
+				getCartDescription(row?.id)
+			}
+		} catch (error) { }
+	};
+
+	const handleConfirmProductAdd = (id: any, afterPrice: any) => {
 		setOpen(!open);
-		//deleteCartById(id);
+		confirmCartById(id, afterPrice);
+	};
+
+	const handleDeleteProductAdd = (id: any) => {
+		setOpen(!open);
+		deleteAdditionalProductInCart(id);
 	};
 
 	const handleClick = () => {
@@ -117,15 +132,19 @@ function Row(props: any) {
 		setOpenDialog(false);
 	};
 
+	// delete nguyên cart
 	const handleDeleteCart = async () => {
 		try {
-			const res = await deleteCartByIdAPI(row?.id);
+			const res = await deleteCartByIdAPI({
+				cartId: row?.id,
+				idUser,
+			});
 			if (res?.status === 200) {
 				setOpenToast(true);
 				setContentToast('Hủy đơn hàng thành công');
 				setSeverity('success');
 				setOpenDialog(false)
-				setTimeout(() => getCartById(idUser), 1000)
+				setTimeout(() => getCartById(idCardNumber), 1000)
 			} else {
 				setOpenToast(true);
 				setContentToast('Đã xảy ra lỗi khi hủy đơn hàng');
@@ -176,7 +195,7 @@ function Row(props: any) {
 					colSpan={6}
 				>
 					<Collapse in={open} timeout="auto" unmountOnExit>
-						{item?.length > 0 ? (
+						{listProduct?.length > 0 ? (
 							<Box sx={{ margin: 4 }}>
 								<Typography
 									variant="h6"
@@ -198,7 +217,7 @@ function Row(props: any) {
 										</TableRow>
 									</TableHead>
 									<TableBody>
-										{item?.map((value: any) => (
+										{listProduct?.map((value: any) => (
 											<TableRow>
 												<TableCell
 													component="th"
@@ -222,7 +241,7 @@ function Row(props: any) {
 								</Table>
 							</Box>
 						) : null}
-						{item?.services?.length > 0 ? (
+						{listService?.length > 0 ? (
 							<Box sx={{ margin: 4 }}>
 								<Typography
 									variant="h6"
@@ -244,7 +263,7 @@ function Row(props: any) {
 										</TableRow>
 									</TableHead>
 									<TableBody>
-										{item?.services?.map((value: any) => (
+										{listService?.map((value: any) => (
 											<TableRow>
 												<TableCell
 													component="th"
@@ -268,14 +287,14 @@ function Row(props: any) {
 								</Table>
 							</Box>
 						) : null}
-						{item?.productAdd?.length > 0 ? (
+						{listProductAdd?.length > 0 ? (
 							<Box sx={{ margin: 4 }}>
 								<Typography
 									variant="h6"
 									gutterBottom
 									component="div"
 								>
-									Dịch vụ sau kiểm tra
+									Sản phẩm được thêm sau khi kiểm tra
 								</Typography>
 								<Table size="small" aria-label="purchases">
 									<TableHead>
@@ -290,21 +309,41 @@ function Row(props: any) {
 										</TableRow>
 									</TableHead>
 									<TableBody>
-										{item?.productAdd?.map((value: any) => (
+										{/*{listProduct?.map((value: any) => (
 											<TableRow>
 												<TableCell
 													component="th"
 													scope="row"
 													sx={{ width: '400px' }}
 												>
-													{value?.productId?.name}
+													{value?.product?.name}
 												</TableCell>
 												<TableCell align="center">
 													{value?.quantity}
 												</TableCell>
 												<TableCell align="right">
 													{formatMoneyWithDot(
-														value?.productId
+														value?.price *
+														value?.quantity
+													)}
+												</TableCell>
+											</TableRow>
+										))}*/}
+										{listProductAdd?.map((value: any) => (
+											<TableRow>
+												<TableCell
+													component="th"
+													scope="row"
+													sx={{ width: '400px' }}
+												>
+													{value?.product?.name}
+												</TableCell>
+												<TableCell align="center">
+													{value?.quantity}
+												</TableCell>
+												<TableCell align="right">
+													{formatMoneyWithDot(
+														value?.product
 															?.price *
 														value?.quantity
 													)}
@@ -315,7 +354,7 @@ function Row(props: any) {
 								</Table>
 							</Box>
 						) : null}
-						{item?.productAdd?.length > 0 ? (
+						{listProductAdd?.length > 0 ? (
 							<Box
 								width="100%"
 								style={{
@@ -330,7 +369,7 @@ function Row(props: any) {
 										alignSelf: 'end',
 									}}
 								>
-									Tổng tiền sau:{'   '}
+									Tổng tiền sau khi được báo giá:{'   '}
 								</Box>
 								<Box
 									sx={{
@@ -345,7 +384,7 @@ function Row(props: any) {
 								</Box>
 							</Box>
 						) : null}
-						{item?.productAdd?.length > 0 ? (
+						{listProductAdd?.length > 0 ? (
 							<Box
 								width="100%"
 								style={{
@@ -356,15 +395,15 @@ function Row(props: any) {
 							>
 								<Button
 									onClick={() =>
-										handleConfirm(
-											item?._id,
+										handleConfirmProductAdd(
+											listProductAdd?.[0]?.cart?.id,
 											totalPirceCartmsets
 										)
 									}
 								>
 									Xác nhận
 								</Button>
-								<Button onClick={() => handleDelete(item?._id)}>
+								<Button onClick={() => handleDeleteProductAdd(listProductAdd?.[0]?.cart?.id)}>
 									Huỷ
 								</Button>
 							</Box>
@@ -409,10 +448,12 @@ function Row(props: any) {
 export default function CollapsibleTable() {
 	const [rows, setRows] = useState([]);
 	const [idCardNumber, setIdCardNumber] = useState();
+	const [idUser, setIdUser] = useState();
 
 	const onGetUserInformation = useCallback(async () => {
 		const response = await getUserInfo();
 		if (response?.status === 200) {
+			setIdUser(response?.data?.id);
 			setIdCardNumber(response?.data?.idCardNumber);
 			getCartByUserId(response?.data?.idCardNumber);
 		} else {
@@ -467,7 +508,8 @@ export default function CollapsibleTable() {
 									key={row?.id}
 									row={row}
 									getCartById={getCartByUserId}
-									idUser={idCardNumber}
+									idUser={idUser}
+									idCardNumber={idCardNumber}
 								/>
 							))}
 						</TableBody>
