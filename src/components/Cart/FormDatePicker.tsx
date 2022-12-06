@@ -92,7 +92,7 @@ export default function MaxWidthDialog({
 						}}
 					>
 						<DatePicker
-							label="Basic example"
+							label="Select day"
 							value={value}
 							onChange={(newValue: any) => {
 								setValue(newValue);

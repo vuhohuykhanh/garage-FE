@@ -62,6 +62,8 @@ export default function ProductInCart({
 	//	}
 	//}, [change, item?.id, item?.stock, items, quantity, setChange, setItems]);
 
+	console.log('item.image', item.img)
+
 	return (
 		<Box
 			width="80.4%"
@@ -81,7 +83,7 @@ export default function ProductInCart({
 				<img
 					width="150px"
 					height="130px"
-					src={item?.img || require('../../assets/images/bg1.png')}
+					src={item?.img ? `http://localhost:5000/api/image/${item?.img?.filename}` : require('../../assets/images/bg1.png')}
 					alt="detailImage"
 				/>
 			</Box>

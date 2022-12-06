@@ -85,7 +85,7 @@ export default function TitleService({ services }: any) {
 				className={styles.detail_image}
 				src={services?.[0]?.image
 					? `http://localhost:5000/api/image/${services?.[0]?.image?.filename}`
-					 : require('../../assets/images/bg1.png')
+					: require('../../assets/images/bg1.png')
 				}
 				//src={services[0]?.image}
 				alt="detail_img"

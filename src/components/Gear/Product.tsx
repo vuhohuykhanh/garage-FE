@@ -69,7 +69,7 @@ const ProductItemService = (product: any) => {
 							{product?.saleDescriptions?.[0]?.salePercent
 								? formatMoney(
 									product?.price,
-									product?.saleDescriptions?.[0]?.salePercent
+									product?.saleDescriptions?.[product?.saleDescriptions?.length - 1]?.salePercent
 								)
 								: ''}
 						</Typography>
@@ -91,8 +91,8 @@ const ProductItemService = (product: any) => {
 								transform: 'translate(-50%, -50%)',
 							}}
 						>
-							{product?.saleDescriptions?.[0]?.salePercent}
-							{product?.saleDescriptions?.[0]?.salePercent
+							{product?.saleDescriptions?.[product?.saleDescriptions?.length - 1]?.salePercent}
+							{product?.saleDescriptions?.[product?.saleDescriptions?.length - 1]?.salePercent
 								? '%'
 								: ''}
 						</Typography>

@@ -30,7 +30,7 @@ export default function TitleGearDetail({ product }: any) {
 	const salePrice = () => {
 		return (
 			product?.price -
-			(product?.price * product?.saleDescriptions?.[0]?.salePercent) / 100
+			(product?.price * product?.saleDescriptions?.[product?.saleDescriptions?.length - 1]?.salePercent) / 100
 		);
 	};
 
