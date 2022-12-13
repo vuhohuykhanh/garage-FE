@@ -29,6 +29,7 @@ import {
   GET_PRODUCT_BY_PRODUCT_TYPE,
   GET_PRODUCT_BY_ACCESSORY_TYPE,
   GET_PRODUCT_BY_SERVICE_TYPE,
+	GET_PRODUCT_BY_MANUFACTURER_AND_ACCESSORY_TYPE,
   GET_PRODUCT_BY_ID,
   UPDATE_PRODUCT_BY_ID,
   DELETE_PRODUCT_BY_ID,
@@ -171,6 +172,15 @@ export const sendEmailAPI = async (body: any) => {
 };
 
 // manufacturer
+export const getAllManufacturerAPI = async () => {
+  try {
+    const response = await axios.get(GET_ALL_MANUFACTURER);
+    return response;
+  } catch (error: any) {
+    return error?.response?.data || error;
+  }
+};
+
 
 // product
 export const getAllProductAPI = async () => {
@@ -214,6 +224,22 @@ export const getProductByServiceTypeAPI = async (id: any) => {
     return error?.response?.data || error;
   }
 };
+
+export const getProductByManufacturerAndAccessoryTypeAPI = async (idAccessory: string, idManufacturer: string) => {
+	try {
+		let url;
+		if(idManufacturer) {
+			url = `${GET_PRODUCT_BY_MANUFACTURER_AND_ACCESSORY_TYPE}?accessoryId=${idAccessory}&manufacturerId=${idManufacturer}`;
+		} 
+		else {
+			url = `${GET_PRODUCT_BY_MANUFACTURER_AND_ACCESSORY_TYPE}?accessoryId=${idAccessory}`
+		}
+		const response = await axios.get(url);
+		return response;
+	} catch (error: any) {
+		return error?.response?.data || error;
+	}
+}
 
 export const getProductByIdAPI = async (id: any) => {
   try {

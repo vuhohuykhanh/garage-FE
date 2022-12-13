@@ -132,7 +132,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }: any) {
                         1
                     </Box>
                     <Button onClick={handleClick1}>
-                        <TypographyeText>PHỤ KIỆN</TypographyeText>
+                        <TypographyeText>PHỤ TÙNG</TypographyeText>
                         {/* <ArrowDropDownIcon color="action" /> */}
                     </Button>
                 </BoxContentHeader>
@@ -296,7 +296,7 @@ export default function HeaderComponent({ userInfo, setUserInfo }: any) {
                                 fontSize: '24px',
                             }}
                         >
-                            PHỤ KIỆN
+                            PHỤ TÙNG
                         </TypographyeText>
                         <Box
                             mb={3}
