@@ -8,7 +8,7 @@ import styles from '../style.module.css';
 export default function SevicesDetail() {
 	const { search } = useLocation();
 	const [services, setServices] = useState<any>([]);
-	const description = services?.[0]?.description;
+	const description = services?.[0]?.productDescriptions;
 	const id = search.split('?')[1];
 
 	async function getProductById(id: any) {
@@ -57,8 +57,9 @@ export default function SevicesDetail() {
 			</Box>
 			<TitleService services={services} />
 			<Box width="80%" m="auto">
+				<h1>Mô tả sản phẩm</h1>
 				{description?.map((value: any) => (
-					<Typography key={value._id} className={styles.value?.type}>
+					<Typography key={value._id} className={styles.content}>
 						{value.content}
 					</Typography>
 				))}

@@ -36,7 +36,7 @@ import { CartDetail } from '../../assets/constants/all-enum';
 function Row(props: any) {
 	const { row, getCartById, idUser, idCardNumber } = props;
 	const [open, setOpen] = React.useState(false);
-	const [totalPirceCartmsets, setTotalPirceCartmsets] = useState(0);
+	const [totalPriceCartAfterAccept, setTotalPriceCartAfterAccept] = useState(0);
 	const [openToast, setOpenToast] = React.useState(false);
 	const [contentToast, setContentToast] = React.useState('');
 	const [severity, setSeverity] = React.useState('');
@@ -60,16 +60,15 @@ function Row(props: any) {
 		//	) || 0;
 		const priceProduct =
 			listProduct?.reduce(
-				(a: any, b: any) => a + b?.quantity * b?.product?.price,
+				(a: any, b: any) => a + b?.quantity * b?.price,
 				0
 			) || 0;
 		const priceProductAdd =
 			listProductAdd?.reduce(
-				(a: any, b: any) => a + b?.quantity * b?.product?.price,
+				(a: any, b: any) => a + b?.quantity * b?.price,
 				0
 			) || 0;
-		//setTotalPirceCartmsets(priceServices + priceProduct + priceProductAdd);
-		setTotalPirceCartmsets(priceProduct + priceProductAdd);
+		setTotalPriceCartAfterAccept(priceProduct + priceProductAdd);
 	}, [listProduct, listProductAdd]);
 
 	const getCartDescription = async (id: any) => {
@@ -208,11 +207,12 @@ function Row(props: any) {
 									<TableHead>
 										<TableRow>
 											<TableCell>Tên sản phẩm</TableCell>
+											<TableCell align="center">Giá</TableCell>
 											<TableCell align="center">
 												Số lượng
 											</TableCell>
 											<TableCell align="right">
-												Giá tiền
+												Tổng
 											</TableCell>
 										</TableRow>
 									</TableHead>
@@ -225,6 +225,9 @@ function Row(props: any) {
 													sx={{ width: '400px' }}
 												>
 													{value?.product?.name}
+												</TableCell>
+												<TableCell align="center">
+													{formatMoneyWithDot(value?.price)}
 												</TableCell>
 												<TableCell align="center">
 													{value?.quantity}
@@ -300,11 +303,12 @@ function Row(props: any) {
 									<TableHead>
 										<TableRow>
 											<TableCell>Tên sản phẩm</TableCell>
+											<TableCell align="center">Giá</TableCell>
 											<TableCell align="center">
 												Số lượng
 											</TableCell>
 											<TableCell align="right">
-												Giá tiền
+												Tổng
 											</TableCell>
 										</TableRow>
 									</TableHead>
@@ -339,13 +343,14 @@ function Row(props: any) {
 													{value?.product?.name}
 												</TableCell>
 												<TableCell align="center">
+													{formatMoneyWithDot(value?.price)}
+												</TableCell>
+												<TableCell align="center">
 													{value?.quantity}
 												</TableCell>
 												<TableCell align="right">
 													{formatMoneyWithDot(
-														value?.product
-															?.price *
-														value?.quantity
+														value?.price * value?.quantity
 													)}
 												</TableCell>
 											</TableRow>
@@ -380,7 +385,7 @@ function Row(props: any) {
 										color: 'red',
 									}}
 								>
-									{formatMoneyWithDot(totalPirceCartmsets)}
+									{formatMoneyWithDot(totalPriceCartAfterAccept)}
 								</Box>
 							</Box>
 						) : null}
@@ -397,7 +402,7 @@ function Row(props: any) {
 									onClick={() =>
 										handleConfirmProductAdd(
 											listProductAdd?.[0]?.cart?.id,
-											totalPirceCartmsets
+											totalPriceCartAfterAccept
 										)
 									}
 								>

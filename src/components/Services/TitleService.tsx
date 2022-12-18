@@ -32,8 +32,6 @@ export default function TitleService({ services }: any) {
 		);
 	};
 
-	console.log('services', services)
-
 	useEffect(() => {
 		checkLogin();
 	}, [checkLogin]);

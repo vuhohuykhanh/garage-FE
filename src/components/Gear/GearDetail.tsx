@@ -58,8 +58,9 @@ export default function GearDetail() {
 			</Box>
 			<TitleGearDetail product={product?.[0]} />
 			<Box width="80%" m="auto">
+				<h1>Mô tả sản phẩm: </h1>
 				{description?.map((value: any) => (
-					<Typography key={value._id} className={styles.value?.type}>
+					<Typography key={value._id} className={styles.content}>
 						{value.content}
 					</Typography>
 				))}
