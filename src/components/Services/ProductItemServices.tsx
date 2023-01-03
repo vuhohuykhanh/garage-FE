@@ -6,12 +6,12 @@ import {
 	Typography,
 	Box,
 } from '@mui/material';
-import formatMoneyWithDot from '../../assets/constants/until';
+//import formatMoneyWithDot from '../../assets/constants/until';
 import styles from '../style.module.css'
 
-const formatMoney = (price: any, sale: any) => {
-	return formatMoneyWithDot(price - (price * sale) / 100);
-};
+//const formatMoney = (price: any, sale: any) => {
+//	return formatMoneyWithDot(price - (price * sale) / 100);
+//};
 
 const ProductItemService = (service: any) => {
 	return (
@@ -54,46 +54,8 @@ const ProductItemService = (service: any) => {
 					}}
 				>
 					<Box>
-						<Typography
-							variant="body2"
-							className={
-								service?.saleDescriptions?.[0]?.salePercent
-									? styles.typical_price
-									: styles.sale_price
-							}
-						>
-							{formatMoneyWithDot(service.price)}
-						</Typography>
 						<Typography variant="body2" className={styles.sale_price}>
-							{service?.saleDescriptions?.[0]?.salePercent
-								? formatMoney(
-									service.price,
-									service?.saleDescriptions?.[service?.saleDescriptions?.length - 1]?.salePercent
-								)
-								: ''}
-						</Typography>
-					</Box>
-					<Box sx={{ position: 'relative' }}>
-						{service?.saleDescriptions?.[0]?.salePercent ? (
-							<img
-								src={require('../../assets/images/iconSale.png')}
-								alt="sale_img"
-							/>
-						) : (
-							''
-						)}
-						<Typography
-							sx={{
-								position: 'absolute',
-								top: '50%',
-								left: '50%',
-								transform: 'translate(-50%, -50%)',
-							}}
-						>
-							{service?.saleDescriptions?.[service?.saleDescriptions?.length - 1]?.salePercent}
-							{service?.saleDescriptions?.[0]?.salePercent
-								? '%'
-								: ''}
+							{service?.price === "0" ? "Liên hệ" : service?.price + "đ"}
 						</Typography>
 					</Box>
 				</CardContent>

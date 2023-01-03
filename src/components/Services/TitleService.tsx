@@ -104,7 +104,7 @@ export default function TitleService({ services }: any) {
 							{services[0]?.name}
 						</Typography>
 
-						{services[0]?.saleDescriptions.length ? (
+						{/*{services[0]?.saleDescriptions.length ? (
 							<Box>
 								<Box
 									sx={{
@@ -159,7 +159,7 @@ export default function TitleService({ services }: any) {
 									</Typography>
 								</Box>
 							</Box>
-						) : (
+						) : (*/}
 							<Box sx={{ display: 'flex', alignItems: 'center' }}>
 								<Typography
 									style={{
@@ -177,10 +177,11 @@ export default function TitleService({ services }: any) {
 										marginLeft: '61px',
 									}}
 								>
-									{formatMoneyWithDot(services[0]?.price)}
+									{/*{formatMoneyWithDot(services[0]?.price)}*/}
+									{services[0]?.price == 0 ? "Liên hệ" : services[0]?.price}
 								</Typography>
 							</Box>
-						)}
+						{/*)}*/}
 						<Box
 							width="100%"
 							sx={{

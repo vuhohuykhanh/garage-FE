@@ -44,6 +44,8 @@ function Row(props: any) {
 	const [listService, setListService] = useState<any>([]);
 	const [listProductAdd, setListProductAdd] = useState<any>([]);
 
+	console.log('row', row);
+
 	const [openDialog, setOpenDialog] = useState(false);
 
 	function formatDate(str: any) {
@@ -175,6 +177,9 @@ function Row(props: any) {
 					{formatDate(row?.createTime)}
 				</TableCell>
 				<TableCell align="center">
+					{row?.timeToDone ? formatDate(row?.timeToDone) : ""}
+				</TableCell>
+				<TableCell align="center">
 					{row?.status?.name}
 				</TableCell>
 				<TableCell align="center">
@@ -191,7 +196,7 @@ function Row(props: any) {
 			<TableRow>
 				<TableCell
 					style={{ paddingBottom: 0, paddingTop: 0 }}
-					colSpan={6}
+					colSpan={7}
 				>
 					<Collapse in={open} timeout="auto" unmountOnExit>
 						{listProduct?.length > 0 ? (
@@ -502,6 +507,7 @@ export default function CollapsibleTable() {
 								<TableCell />
 								<TableCell>Mã đơn hàng</TableCell>
 								<TableCell align="center">Tạo lúc</TableCell>
+								<TableCell align="center">Dự kiến xong</TableCell>
 								<TableCell align="center">Trạng thái</TableCell>
 								<TableCell align="center">Giá </TableCell>
 								<TableCell align="center" />
