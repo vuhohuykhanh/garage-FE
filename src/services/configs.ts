@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://slightly-renewed-satyr.ngrok-free.app/api';
 
 //accessory-type
 export const GET_ALL_ACCESSORY_TYPE = `${BASE_URL}/accessory-type/get-all`;
